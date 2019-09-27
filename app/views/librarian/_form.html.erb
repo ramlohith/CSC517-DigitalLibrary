@@ -1,0 +1,39 @@
+<div class="heading">
+  <h1> Staff Registration </h1>
+</div>
+
+<div class="msg">
+  <% if flash[:alert] %>
+    <div class="alert"><%= flash[:alert] %></div>
+  <% end %>
+</div>
+<br>
+
+<div class="forms">
+  <%= form_for @librarian do |form| %>
+    <p>
+      <%= form.label :email %><br>
+      <%= form.text_field :email %>
+    </p>
+    <p>
+
+      <%= form.label :name %><br>
+      <%= form.text_field :name %>
+
+    </p>
+    <p>
+      <%= form.label :password %><br>
+      <%= form.password_field :password %>
+
+    </p>
+    <p>
+      <%= form.label :library %>
+      <%= select("librarian", "library", Library.all.collect{ |c| [ c.name, c.id] }) %>
+    </p>
+
+    <p>
+      <%= form.submit %>
+    </p>
+
+  <% end %>
+</div>

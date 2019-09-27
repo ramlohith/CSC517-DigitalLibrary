@@ -35,5 +35,16 @@
         </library>
       </libraries>
     </data-source>
+    <data-source source="LOCAL" name="Rails DigitalLibrary: development" uuid="6720ba7d-3c0c-4a96-a889-4b344f9c1fdd">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <imported>true</imported>
+      <remarks>$PROJECT_DIR$/config/database.yml</remarks>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:C:\Users\subha\CSC517\db\development.sqlite3</jdbc-url>
+      <driver-properties>
+        <property name="enable_load_extension" value="true" />
+      </driver-properties>
+    </data-source>
   </component>
 </project>

@@ -1,0 +1,13 @@
+<div class="heading">
+  <h1> Staff Registration </h1>
+</div>
+
+<div class="msg">
+  <% if flash[:alert] %>
+    <div class="alert"><%= flash[:alert] %></div>
+  <% end %>
+</div>
+<br>
+
+<% render 'librarian/form' %>
+

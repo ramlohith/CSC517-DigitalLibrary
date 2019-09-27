@@ -1,25 +1,28 @@
-<h1>Welcome to Digital Library</h1>
-<h2>Login</h2>
+<div class="heading">
+  <h1 >Digital Library</h1></div>
+</div>
+<br>
+<br>
+<div class="msg">
+  <% if flash[:alert] %>
+    <p id="notice"><%= flash[:alert] %></p>
+  <% end %>
+</div>
+<br>
+<br>
+<br>
+<div class="body">
+  <table>
+    <tr>
+      <th><%= link_to image_tag("home/students.png", width: "675px"), students_login_url %></th>
+      <th><%= link_to image_tag("home/staff.png", width: "745px", height: "363px"), librarian_login_url %></th>
+    </tr>
+    <tr>
+      <th><%= link_to "Students", students_login_url %></th>
+      <th><%= link_to "Staff", librarian_login_url %></th>
+    </tr>
+  </table>
+</div>
 
-<%= form_with scope: :student, url: students_path, local:  true do |f| %>
-  <p>
-    <%=f.label :email %><br/>
-    <%=f.text_field :email %>
-  </p>
-  <p>
-    <%= f.label :password %><br>
-    <%= f.password_field :password %>
-  </p>
-  <p>
-    <%= f.label :Who_are_you? %><br>
-    <%= f.radio_button :Who_are_you?, 'Student', :checked => true %>
-    <%= f.label :undergrad, 'Student' %>
-    <%= f.radio_button :Who_are_you?, 'Staff' %>
-    <%= f.label :graduate, 'Staff' %>
-    <%= f.radio_button :Who_are_you?, 'Admin' %>
-    <%= f.label :phd, 'Admin' %>
-  </p>
-  <%= f.submit :Login %><br>
-  <br>
-  <%= link_to 'New User Please Register here', new_student_path %>
-<% end %>
+
+

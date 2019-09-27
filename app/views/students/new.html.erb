@@ -1,36 +1,13 @@
-<h1>Register for Digital Library</h1>
-<%= form_with scope: :student, url:students_path, local: true do |form| %>
-  <p>
-    <%= form.label :email %><br>
-    <%= form.text_field :email %>
-  </p>
-  <p>
-    <%= form.label :name %><br>
-    <%= form.text_field :name %>
+<div class="heading">
+  <h1>Student Registration </h1>
+</div>
 
-  </p>
-  <p>
-    <%= form.label :password %><br>
-    <%= form.password_field :password %>
+<div class="msg">
+  <% if flash[:alert] %>
+    <div class="alert"><%= flash[:alert] %></div>
+  <% end %>
+</div>
+<br>
 
-  </p>
-  <p>
-    <%= form.label :education %><br>
-    <%= form.radio_button :education, 'undergrad', :checked => true %>
-    <%= form.label :undergrad, 'UnderGraduate' %>
-    <%= form.radio_button :education, 'graduate' %>
-    <%= form.label :graduate, 'Graduate' %>
-    <%= form.radio_button :education, 'phd' %>
-    <%= form.label :phd, 'PhD' %>
 
-  </p>
-  <p>
-    <%= form.label :university %><br>
-    <%= form.text_field :university %>
-  </p>
-
-  <p>
-    <%= form.submit %>
-  </p>
-
-<% end %>
+<%= render 'students/form' %>
