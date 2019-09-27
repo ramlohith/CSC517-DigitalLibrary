@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_21_203306) do
+ActiveRecord::Schema.define(version: 2019_09_26_011203) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email"
@@ -20,17 +20,76 @@ ActiveRecord::Schema.define(version: 2019_09_21_203306) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "approval_requests", force: :cascade do |t|
+    t.string "student_email"
+    t.string "isbn"
+    t.string "title"
+    t.string "author"
+    t.integer "edition"
+    t.string "university"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "book_requests", force: :cascade do |t|
+    t.string "library_name"
+    t.string "isbn"
+    t.integer "books_available"
+    t.integer "books_checkedout"
+    t.integer "books_holdrequest"
+    t.datetime "created_at", precision: 6
+    t.datetime "updated_at", precision: 6
+  end
+
+  create_table "bookmarks", force: :cascade do |t|
+    t.string "student_name"
+    t.string "student_email"
+    t.string "isbn"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "title"
+    t.string "author"
+    t.integer "edition"
+  end
+
   create_table "books", force: :cascade do |t|
     t.string "isbn"
     t.string "title"
     t.string "author"
     t.string "language"
     t.string "published"
-    t.datetime "edition"
+    t.integer "edition"
     t.binary "image"
     t.string "subject"
     t.text "summary"
     t.boolean "special"
+    t.datetime "created_at", precision: 6
+    t.datetime "updated_at", precision: 6
+    t.string "library"
+    t.integer "number_available"
+    t.integer "number_checkedout"
+    t.integer "number_holdrequest"
+    t.string "university"
+  end
+
+  create_table "history_requests", force: :cascade do |t|
+    t.string "library_name"
+    t.string "isbn"
+    t.string "status"
+    t.string "student_name"
+    t.string "student_email"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "hold_requests", force: :cascade do |t|
+    t.string "student_email"
+    t.string "student_name"
+    t.string "isbn"
+    t.string "title"
+    t.string "author"
+    t.integer "edition"
+    t.string "university"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -50,8 +109,8 @@ ActiveRecord::Schema.define(version: 2019_09_21_203306) do
     t.string "location"
     t.integer "maxdays"
     t.decimal "fine"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", precision: 6
+    t.datetime "updated_at", precision: 6
   end
 
   create_table "students", force: :cascade do |t|

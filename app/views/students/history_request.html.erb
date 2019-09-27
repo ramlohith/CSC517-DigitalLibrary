@@ -9,6 +9,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
 <body>
+
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -22,31 +23,36 @@
     </ul>
   </div>
 </nav>
+
 <div class="container">
-  <p>Yet to be determined</p>
-  <div class="container">
-    <table class="table table-striped">
-      <thead>
-      <tr>
-        <th scope="col">ISBN</th>
-        <th scope="col">Title</th>
-        <th scope="col">Author</th>
-        <th scope="col">Edition</th>
-      </tr>
-      </thead>
-      <tbody>
-      <% if !@bookmark.nil? then @bookmark.each do |book| %>
-          <tr>
-            <td><%= book.isbn %></td>
-            <td><%= book.title%></td>
-            <td><%= book.author %></td>
-            <td><%= book.edition %></td>
-          </tr>
-        <% end %>
+  <% if flash[:alert] %>
+    <p id="notice"><%= flash[:alert] %></p>
+  <% end %>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th scope="col">Library</th>
+      <th scope="col">ISBN</th>
+      <th scope="col">Status</th>
+      <th scope="col">Time Checked out</th>
+      <th scope="col">Return</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% if !@hist_req.nil? then @hist_req.each do |hist| %>
+        <tr>
+          <td><%= hist.library_name %></td>
+          <td><%= hist.isbn%></td>
+          <td><%= hist.status %></td>
+          <td><%= hist.updated_at %></td>
+          <td><%= link_to students_book_return_path(type: "book_return", :hist_id => hist.id) do %>
+            <button>Return</button>
+            <%  end  %></td>
+        </tr>
       <% end %>
-      </tbody>
-    </table>
-  </div>
-  </div>
+    <% end %>
+    </tbody>
+  </table>
+</div>
 </body>
 </html>

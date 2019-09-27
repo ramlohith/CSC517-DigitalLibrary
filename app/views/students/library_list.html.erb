@@ -9,6 +9,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
 <body>
+
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -22,31 +23,29 @@
     </ul>
   </div>
 </nav>
+
 <div class="container">
-  <p>Yet to be determined</p>
-  <div class="container">
-    <table class="table table-striped">
-      <thead>
-      <tr>
-        <th scope="col">ISBN</th>
-        <th scope="col">Title</th>
-        <th scope="col">Author</th>
-        <th scope="col">Edition</th>
-      </tr>
-      </thead>
-      <tbody>
-      <% if !@bookmark.nil? then @bookmark.each do |book| %>
-          <tr>
-            <td><%= book.isbn %></td>
-            <td><%= book.title%></td>
-            <td><%= book.author %></td>
-            <td><%= book.edition %></td>
-          </tr>
-        <% end %>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">University</th>
+      <th scope="col">Location</th>
+      <th scope="col">Max days a book issued</th>
+    </tr>
+    </thead>
+   <tbody>
+    <% if !@libraries.nil? then @libraries.each do |library| %>
+    <tr>
+      <td><%= library.name %></td>
+      <td><%= library.university%></td>
+      <td><%= library.location %></td>
+      <td><%= library.maxdays %></td>
+    </tr>
       <% end %>
-      </tbody>
-    </table>
-  </div>
-  </div>
+    <% end %>
+   </tbody>
+  </table>
+</div>
 </body>
 </html>

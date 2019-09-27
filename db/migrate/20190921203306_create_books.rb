@@ -11,7 +11,11 @@ class CreateBooks < ActiveRecord::Migration[6.0]
       t.string :subject
       t.text :summary
       t.boolean :special
-
+      t.string :library
+      t.string :university
+      t.integer :number_available
+      t.integer :number_checkedout
+      t.integer :number_holdrequest
       t.timestamps
     end
   end
