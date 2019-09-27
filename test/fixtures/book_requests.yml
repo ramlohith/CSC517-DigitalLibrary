@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  library_id: 
+  isbn: MyString
+  books_available: 
+  books_checkedout: 
+  books_holdrequest: 
+
+two:
+  library_id: 
+  isbn: MyString
+  books_available: 
+  books_checkedout: 
+  books_holdrequest: 
