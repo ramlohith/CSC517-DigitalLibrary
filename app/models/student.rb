@@ -4,5 +4,5 @@ class Student < ApplicationRecord
     validates :name, presence: true
     validates :password, presence: true
     validates :university, presence: true
-    has_secure_password
+    has_secure_password validations: false
 end

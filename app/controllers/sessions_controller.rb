@@ -11,8 +11,9 @@ class SessionsController < ApplicationController
     @student = Student.find_by_email(log_params[:email])
     @librarian = Librarian.find_by_email(log_params[:email])
 
-    if @student.nil? && @librarian != nil
-      if (@librarian.password == log_params[:password]) && (@librarian.email == log_params[:email])
+    if @student.nil? && @librarian != nil?
+      if @librarian && @librarian.authenticate(params[:password])
+      #if (@librarian.password == log_params[:password]) && (@librarian.email == log_params[:email])
         session[:id] = @librarian.id
         render 'librarian/index', alert: "Logged In!!"
       else
@@ -20,8 +21,9 @@ class SessionsController < ApplicationController
       end
     end
 
-    if @student != nil && @librarian.nil?
-      if (@student.password == log_params[:password]) && (@student.email == log_params[:email])
+    if @student != nil? && @librarian.nil?
+      if @student.authenticate(log_params[:password])
+        #if (@student.password == log_params[:password]) && (@student.email == log_params[:email])
         session[:id] = @student.id
         render 'students/index'
       else
