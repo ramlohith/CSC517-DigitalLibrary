@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_26_011203) do
+ActiveRecord::Schema.define(version: 2019_09_28_011501) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email"
@@ -116,7 +116,7 @@ ActiveRecord::Schema.define(version: 2019_09_26_011203) do
   create_table "students", force: :cascade do |t|
     t.string "email"
     t.string "name"
-    t.string "password"
+    t.string "password_digest"
     t.string "education"
     t.string "university"
     t.integer "maxbook"

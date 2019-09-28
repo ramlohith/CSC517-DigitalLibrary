@@ -3,7 +3,7 @@ class CreateStudents < ActiveRecord::Migration[6.0]
     create_table :students do |t|
       t.string :email
       t.string :name
-      t.string :password
+      t.string :password_digest
       t.string :education
       t.string :university
       t.integer :maxbook
