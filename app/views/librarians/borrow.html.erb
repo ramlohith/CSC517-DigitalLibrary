@@ -1,0 +1,23 @@
+<h1>Borrwed History</h1>
+
+<table>
+  <thead>
+  <tr>
+    <th scope="col">Library</th>
+    <th scope="col">ISBN</th>
+    <th scope="col">Status</th>
+    <th scope="col">Time Checked out</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @borrow.each do |bor| %>
+    <tr>
+      <td><%= bor.library_name %></td>
+      <td><%= bor.isbn%></td>
+      <td><%= bor.status %></td>
+      <td><%= bor.updated_at %></td>
+    </tr>
+  <%end %>
+  </tbody>
+</table>

@@ -19,6 +19,14 @@ Rails.application.routes.draw do
   post 'login/index'
   post 'login/search'
 
+  get 'librarians/login'
+  post 'librarians/login'
+  get 'librarians/books'
+  post 'librarians/books'
+  post  'librarians/destroy'
+  get 'librarians/checkedout_request', to: 'librarians#checkedout_request', as: :librarians_checkedout_request
+  get 'librarians/borrow', to: 'librarians#borrow', as: :librarians_borrow
+
   get 'students/index'
   post 'students/create'
   post 'students/index'
@@ -30,18 +38,10 @@ Rails.application.routes.draw do
   patch 'students/:id', to: 'students#update'
   get 'students/show'
 
-
-  get 'librarian/index'
-  post 'librarian/create'
-  post 'librarian/index'
-  get 'librarian/login'
-  post 'librarian/login'
-
-
   resources :students
   resources :login
   resources :sessions
-  resources :librarian
+  resources :librarians
 
   root 'login#index'
 

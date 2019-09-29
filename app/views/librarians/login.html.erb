@@ -1,5 +1,5 @@
 <div class="heading">
-  <h1>Staff Login</h1></div>
+  <h1>Librarians Login</h1></div>
 </div>
 
 <div class="msg">
@@ -11,7 +11,7 @@
 
 <div class="forms">
 
-  <%= form_with scope: :sessions, url: sessions_create_url, local:  true do |f| %>
+  <%= form_with scope: :sessions, url: sessions_url, local:  true do |f| %>
     <p>
       <%=f.label :email %><br/>
       <%=f.text_field :email %>

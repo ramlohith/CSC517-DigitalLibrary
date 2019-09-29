@@ -10,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_28_011501) do
+ActiveRecord::Schema.define(version: 2019_09_26_011203) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email"
     t.string "name"
-    t.string "password"
+    t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -32,24 +32,24 @@ ActiveRecord::Schema.define(version: 2019_09_28_011501) do
   end
 
   create_table "book_requests", force: :cascade do |t|
-    t.string "library_name"
+    t.integer "library_id"
     t.string "isbn"
     t.integer "books_available"
     t.integer "books_checkedout"
     t.integer "books_holdrequest"
-    t.datetime "created_at", precision: 6
-    t.datetime "updated_at", precision: 6
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "bookmarks", force: :cascade do |t|
     t.string "student_name"
     t.string "student_email"
     t.string "isbn"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
     t.string "title"
     t.string "author"
     t.integer "edition"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "books", force: :cascade do |t|
@@ -58,18 +58,18 @@ ActiveRecord::Schema.define(version: 2019_09_28_011501) do
     t.string "author"
     t.string "language"
     t.string "published"
-    t.integer "edition"
+    t.datetime "edition"
     t.binary "image"
     t.string "subject"
     t.text "summary"
     t.boolean "special"
-    t.datetime "created_at", precision: 6
-    t.datetime "updated_at", precision: 6
     t.string "library"
+    t.string "university"
     t.integer "number_available"
     t.integer "number_checkedout"
     t.integer "number_holdrequest"
-    t.string "university"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "history_requests", force: :cascade do |t|
@@ -97,7 +97,7 @@ ActiveRecord::Schema.define(version: 2019_09_28_011501) do
   create_table "librarians", force: :cascade do |t|
     t.string "email"
     t.string "name"
-    t.string "password"
+    t.string "password_digest"
     t.string "library"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -109,8 +109,8 @@ ActiveRecord::Schema.define(version: 2019_09_28_011501) do
     t.string "location"
     t.integer "maxdays"
     t.decimal "fine"
-    t.datetime "created_at", precision: 6
-    t.datetime "updated_at", precision: 6
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "students", force: :cascade do |t|

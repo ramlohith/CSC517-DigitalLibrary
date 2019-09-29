@@ -12,12 +12,12 @@ class SessionsController < ApplicationController
     @librarian = Librarian.find_by_email(log_params[:email])
 
     if @student.nil? && @librarian != nil?
-      if @librarian && @librarian.authenticate(params[:password])
+      if @librarian.authenticate(log_params[:password])
       #if (@librarian.password == log_params[:password]) && (@librarian.email == log_params[:email])
         session[:id] = @librarian.id
-        render 'librarian/index', alert: "Logged In!!"
+        render 'librarians/index', alert: "Logged In!!"
       else
-        redirect_to librarian_login_url, alert: "Invalid ID or Password!!"
+        redirect_to librarians_login_url, alert: "Invalid ID or Password!!"
       end
     end
 
