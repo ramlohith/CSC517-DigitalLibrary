@@ -23,6 +23,8 @@ Rails.application.routes.draw do
   post 'librarians/login'
   get 'librarians/books'
   post 'librarians/books'
+  get 'librarians/show'
+  post 'librarians/show'
   post  'librarians/destroy'
   get 'librarians/checkedout_request', to: 'librarians#checkedout_request', as: :librarians_checkedout_request
   get 'librarians/borrow', to: 'librarians#borrow', as: :librarians_borrow

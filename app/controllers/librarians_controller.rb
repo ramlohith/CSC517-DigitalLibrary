@@ -7,10 +7,10 @@ class LibrariansController < ApplicationController
     end
   end
 
-  def history_request
+  def show
     @librarian = Librarian.find(session[:id])
-    #@his_req = HistoryRequest.where(library_name:@librarian.library,status:"Waiting for Approval")
-    @his_req = HistoryRequest.new(:library_name => "Hunt", :status => "test")
+    @hold = HistoryRequest.where(:library_name=>@librarian.library,:status=>"Waiting for Approval")
+    render "librarians/history_request"
   end
 
   def checkedout_request
@@ -23,12 +23,6 @@ class LibrariansController < ApplicationController
     @librarian = Librarian.find(session[:id])
     @borrow = HistoryRequest.where(:library_name=>@librarian.library)
     render "librarians/borrow"
-  end
-
-  def show
-    @librarian = Librarian.find(session[:id])
-    @hist_request = HistoryRequest.where(:library_name=>@librarian.library,:status=>"Waiting for Approval")
-    render "librarians/history_request"
   end
 
   def books
