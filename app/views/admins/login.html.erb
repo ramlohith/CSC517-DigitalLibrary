@@ -1,0 +1,29 @@
+<div class="heading">
+  <h1>Admin Login</h1></div>
+</div>
+
+<div class="msg">
+  <% if flash[:alert] %>
+    <p id="notice"><%= flash[:alert] %></p>
+  <% end %>
+</div>
+<br>
+
+<div class="forms">
+
+  <%= form_with scope: :sessions, url: sessions_url, local:  true do |f| %>
+    <p>
+      <%=f.label :email %><br/>
+      <%=f.text_field :email %>
+    </p>
+    <p>
+      <%= f.label :password %><br>
+      <%= f.password_field :password %>
+    </p>
+
+    <%= f.submit :Login %><br>
+    <br>
+
+  <% end %>
+
+</div>

@@ -1,0 +1,30 @@
+<div class="heading">
+  <h1>Listing Libraries</h1>
+</div>
+<br/>
+
+<div class="table">
+<table>
+  <tr>
+    <th>Name</th>
+    <th>University</th>
+    <th>Location</th>
+    <th>MaxDays</th>
+    <th>Fine</th>
+  </tr>
+
+  <% @libraries.each do |library| %>
+    <tr>
+      <td><%= library.name %></td>
+      <td><%= library.university %></td>
+      <td><%= library.location %></td>
+      <td><%= library.maxdays %></td>
+      <td><%= library.fine %></td>
+    </tr>
+  <% end %>
+</table>
+  <br/>
+
+  <%= link_to 'New Library', new_library_path %>
+
+</div>
