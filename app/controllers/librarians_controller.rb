@@ -7,6 +7,23 @@ class LibrariansController < ApplicationController
     end
   end
 
+  def edit
+    @librarian = Librarian.find(params[:id])
+  end
+
+  def update
+    @librarian = Librarian.find(params[:id])
+    respond_to do |format|
+      if @librarian.update(email: params[:librarian][:email],name: params[:librarian][:name],password: params[:librarian][:password],library: params[:librarian][:library])
+        format.html { render 'librarians/index', notice: 'Librarian was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action:"edit" }
+        format.json { render json: @library.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   def show
     @librarian = Librarian.find(session[:id])
     @hold = HistoryRequest.where(:library_name=>@librarian.library,:status=>"Waiting for Approval")
@@ -43,7 +60,6 @@ class LibrariansController < ApplicationController
     end
     end
   end
-
 
   def destroy
     bookid = params[:book_id]

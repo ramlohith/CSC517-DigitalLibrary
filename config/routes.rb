@@ -61,6 +61,8 @@ Rails.application.routes.draw do
   resources :students
   resources :login
   resources :sessions
+  resources :librarians
+  resources :libraries
   resources :admins
 
   root 'login#index'
