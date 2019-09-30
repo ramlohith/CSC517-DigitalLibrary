@@ -1,0 +1,35 @@
+<div class="heading">
+  <h1>Books - OnHold </h1>
+</div>
+<br/>
+
+<div class="table">
+  <table>
+    <thead>
+    <tr>
+      <th>ISBN</th>
+      <th>Title</th>
+      <th>Author</th>
+      <th>Edition</th>
+      <th>University</th>
+      <th>Held By</th>
+      <th> Email </th>
+        <th></th>
+    </tr>
+    </thead>
+    <% @h_requests.each do |r| %>
+      <tbody>
+      <tr>
+        <td><%= r.isbn %></td>
+        <td><%= r.title %></td>
+        <td><%= r.author %></td>
+        <td><%= r.edition %></td>
+        <td><%= r.university %></td>
+        <td><%= r.student_name %></td>
+        <td><%= r.student_email %></td>
+      </tr>
+      </tbody>
+    <% end %>
+  </table>
+  <br/>
+</div>

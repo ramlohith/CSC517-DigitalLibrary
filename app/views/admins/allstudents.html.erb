@@ -1,0 +1,27 @@
+<div class="heading">
+  <h1>List Students</h1>
+</div>
+<br/>
+
+<div class="table">
+  <table>
+    <tr>
+      <th>Email</th>
+      <th>Name</th>
+      <th>Education</th>
+      <th>University</th>
+      <th>Action</th>
+    </tr>
+
+    <% @students.each do |s| %>
+      <tr>
+        <td><%= s.email %></td>
+        <td><%= s.name %></td>
+        <td><%= s.education %></td>
+        <td><%= s.university %></td>
+        <td><%= link_to 'Destroy', s, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </table>
+  <br/>
+</div>
