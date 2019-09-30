@@ -1,0 +1,38 @@
+<h1>Books</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th scope="col">ISBN</th>
+      <th scope="col">Title</th>
+      <th scope="col">Author</th>
+      <th scope="col">Language</th>
+      <th scope="col">Published</th>
+      <th scope="col">Edition</th>
+      <th scope="col">Image</th>
+      <th scope="col">Subject</th>
+      <th scope="col">Summary</th>
+      <th scope="col">Special?</th>
+      <th scope="col">Delete</th>
+      <th colspan="1"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+     <% @books.each do |book| %>
+       <tr>
+         <td><%= book.isbn %></td>
+         <td><%= book.title%></td>
+         <td><%= book.author %></td>
+         <td><%= book.language %></td>
+         <td><%= book.published %></td>
+         <td><%= book.edition %></td>
+         <td><%= book.image %></td>
+         <td><%= book.subject %></td>
+         <td><%= book.summary %></td>
+         <td><%= book.special %></td>
+         <td><%= link_to 'Destroy', librarians_destroy_path(:book_id => book.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+       </tr>
+  <%end %>
+  </tbody>
+</table>
