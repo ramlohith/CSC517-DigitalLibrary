@@ -19,11 +19,12 @@
       <li><%= link_to "Libraries", students_library_list_path(type: "library_list")%></li>
       <li><%= link_to "Books", students_books_path(type: "books") %></li>
       <li><%= link_to "Checkout History", students_history_request_path(type: "history_request") %></li>
+      <li><%= link_to "Logout", sessions_destroy_path %></li>
     </ul>
   </div>
 </nav>
 <div class="container">
-  <p>Yet to be determined</p>
+  <p align="right"><%= link_to "Edit Profile", edit_student_path(@student) %> </p>
   <div class="container">
     <table class="table table-striped">
       <thead>

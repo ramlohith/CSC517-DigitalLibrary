@@ -123,10 +123,11 @@ class StudentsController < ApplicationController
     if @student.education == "undergrad"
       @student.maxbook = 2
     elsif @student.education == "grad"
-      @student.maxbook= 4
+      @student.maxbook = 4
     elsif @student.education == "phd"
-      @student.maxbook= 6
+      @student.maxbook = 6
     else
+      @student.maxbook = 2
     end
     if @student.save
       redirect_to students_login_url, alert: "Registration Successful, Please login!!"
@@ -144,7 +145,7 @@ class StudentsController < ApplicationController
     @student.destroy
 
     respond_to do |format|
-      format.html { redirect_to login_index_url }
+      format.html { redirect_to admins_allstudents_path}
       format.json { head :no_content }
     end
   end

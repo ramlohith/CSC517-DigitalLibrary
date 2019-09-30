@@ -29,7 +29,6 @@ class LibrarianController < ApplicationController
 
     def update
       @librarian = Librarian.find(params[:id])
-
       respond_to do |format|
         if @librarian.update(librarian_params)
           format.html { render 'librarian/index', alert: 'Student successfully updated.' }
