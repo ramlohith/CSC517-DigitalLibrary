@@ -1,0 +1,23 @@
+<h1>Checkedout</h1>
+
+<table>
+  <thead>
+  <tr>
+    <th scope="col">Library</th>
+    <th scope="col">ISBN</th>
+    <th scope="col">Status</th>
+    <th scope="col">Time Checked out</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @check_request.each do |check| %>
+    <tr>
+      <td><%= check.library_name %></td>
+      <td><%= check.isbn%></td>
+      <td><%= check.status %></td>
+      <td><%= check.updated_at %></td>
+    </tr>
+  <%end %>
+  </tbody>
+</table>

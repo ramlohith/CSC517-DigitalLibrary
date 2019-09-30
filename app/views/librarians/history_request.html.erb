@@ -1,0 +1,23 @@
+<h1>Hold Request</h1>
+
+<table>
+  <thead>
+  <tr>
+    <th scope="col">Library</th>
+    <th scope="col">ISBN</th>
+    <th scope="col">Status</th>
+    <th scope="col">Time Checked out</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @hold.each do |hist| %>
+    <tr>
+      <td><%= hist.library_name %></td>
+      <td><%= hist.isbn%></td>
+      <td><%= hist.status %></td>
+      <td><%= hist.updated_at %></td>
+    </tr>
+  <%end %>
+  </tbody>
+</table>
