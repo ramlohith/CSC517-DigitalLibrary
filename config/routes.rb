@@ -44,6 +44,7 @@ Rails.application.routes.draw do
   resources :login
   resources :sessions
   resources :librarians
+  resources :libraries
 
   root 'login#index'
 
