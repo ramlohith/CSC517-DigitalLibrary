@@ -1,2 +1,46 @@
-<h1>Libraries#edit</h1>
-<p>Find me in app/views/libraries/edit.html.erb</p>
+<div class="heading">
+  <h1>Edit Library</h1></div>
+</div>
+
+
+<div class="msg">
+  <ul>
+    <% @library.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+</div>
+
+<div class="forms">
+  <%= form_for @library do |form| %>
+    <p>
+      <%= form.label :name %><br>
+      <%= form.text_field :name %>
+    </p>
+
+    <p>
+      <%= form.label :university %><br>
+      <%= form.text_field :university %>
+    </p>
+
+    <p>
+      <%= form.label :location %><br>
+      <%= form.text_field :location %>
+    </p>
+
+    <p>
+      <%= form.label :maxdays %><br>
+      <%= form.text_field :maxdays %>
+    </p>
+
+    <p>
+      <%= form.label :fine %><br>
+      <%= form.text_field :fine %>
+    </p>
+
+    <p>
+      <%= form.submit %>
+    </p>
+
+  <% end %>
+</div>
