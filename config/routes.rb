@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   post 'students/history_request', to: 'students#history_request', as: :students_history_request
   post 'students/bookmark', to: 'students#bookmark', as: :students_bookmark
   post 'students/book_return', to: 'students#book_return', as: :students_book_return
+  post 'students/delete_reservation', to: 'students#book_delete_reservation', as: :students_book_delete_reservation
 
   get 'admin/index'
   resources :libraries

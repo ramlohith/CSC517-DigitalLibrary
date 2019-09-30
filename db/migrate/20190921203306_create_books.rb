@@ -6,7 +6,7 @@ class CreateBooks < ActiveRecord::Migration[6.0]
       t.string :author
       t.string :language
       t.string :published
-      t.datetime :edition
+      t.integer :edition
       t.binary :image
       t.string :subject
       t.text :summary

@@ -25,6 +25,18 @@ class SessionsController < ApplicationController
       if @student.authenticate(log_params[:password])
         #if (@student.password == log_params[:password]) && (@student.email == log_params[:email])
         session[:id] = @student.id
+        totalfine = 0
+        @bookmark = Bookmark.where(student_email: @student.email)
+        @history_request = HistoryRequest.where(student_email: @student.email)
+        @history_request.each do |hist|
+          @book = Book.where(isbn: hist.isbn).first
+          @library = Library.where(university: @book.university, name: @book.library).first
+          hist = hist.calculatefines(@library.maxdays, @library.fine)
+          totalfine = totalfine + hist.fines
+          hist.save
+        end
+        @history_request_totalfines = HistoryRequest.new(:fines => totalfine)
+        @history_request = HistoryRequest.where("fines > 0", student_email: @student.email)
         render 'students/index'
       else
         redirect_to students_login_url, alert: "Invalid ID or Password!!"

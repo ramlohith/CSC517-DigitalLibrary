@@ -113,6 +113,15 @@ class StudentsController < ApplicationController
         book_obj.save
         histreq_obj.save
         redirect_to students_books_path(type: "history_request")
+    elsif my_render_type == "delete_reservation"
+      hist_id = params[:hist_id].to_i
+      histreq_obj = HistoryRequest.find(hist_id)
+      histreq_obj.destroy
+      apprvl_obj = ApprovalRequest.where(:student_email => @student.email, :isbn => histreq_obj.isbn).first
+      apprvl_obj.destroy
+      book_obj = Book.where(:isbn => histreq_obj.isbn).first
+      book_obj.number_available = book_obj.number_available + 1
+      book_obj.number_holdrequest = book_obj.number_holdrequest - 1
       else
       render "students/index" #EDIT THIS!!
     end

@@ -10,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_28_011501) do
+ActiveRecord::Schema.define(version: 2019_09_28_210513) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email"
     t.string "name"
-    t.string "password"
+    t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -80,6 +80,7 @@ ActiveRecord::Schema.define(version: 2019_09_28_011501) do
     t.string "student_email"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.decimal "fines"
   end
 
   create_table "hold_requests", force: :cascade do |t|
@@ -97,7 +98,7 @@ ActiveRecord::Schema.define(version: 2019_09_28_011501) do
   create_table "librarians", force: :cascade do |t|
     t.string "email"
     t.string "name"
-    t.string "password"
+    t.string "password_digest"
     t.string "library"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
