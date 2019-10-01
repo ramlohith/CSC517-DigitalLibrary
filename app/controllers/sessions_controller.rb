@@ -58,7 +58,9 @@ class SessionsController < ApplicationController
         redirect_to students_login_url, alert: "Invalid ID or Password!!"
       end
     end
-
+      end
+    end
+    end
     if @librarian.nil? && @student.nil? && @admin.nil?
       redirect_to login_index_url, alert: "No records found, Please Register!"
     end
@@ -74,5 +76,6 @@ class SessionsController < ApplicationController
     redirect_to login_index_url, alert: "Successfully logged out"
   end
 
-end
+    end
+        end
 
