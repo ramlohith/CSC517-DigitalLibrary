@@ -1,0 +1,51 @@
+<div class="heading">
+  <h1>Edit Book</h1></div>
+</div>
+
+
+<div class="msg">
+  <ul>
+    <% @book.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+</div>
+
+<div class="forms">
+  <%= form_for @book, html: {multipart: true} do |form| %>
+    <p>
+      <%= form.label :isbn %><br>
+      <%= form.text_field :isbn %>
+    </p>
+
+    <p>
+      <%= form.label :title %><br>
+      <%= form.text_field :title %>
+    </p>
+
+    <p>
+      <%= form.label :author %><br>
+      <%= form.text_field :author %>
+    </p>
+
+    <p>
+      <%= form.label :edition %><br>
+      <%= form.text_field :edition %>
+    </p>
+
+    <p>
+      <%= form.label :summary %><br>
+      <%= form.text_field :summary %>
+    </p>
+
+    <p>
+      <%= form.label :library %><br>
+      <%= form.text_field :library %>
+    </p>
+
+    <p>
+      <%= form.submit %>
+    </p>
+
+  <% end %>
+</div>

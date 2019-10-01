@@ -10,6 +10,10 @@ Rails.application.routes.draw do
   get 'admin/index'
   resources :libraries
 
+  get 'books/edit'
+  get 'books/show'
+  post 'books/show'
+
   get 'libraries/edit'
   post '/sessions/create'
   get 'sessions/destroy'
@@ -45,6 +49,7 @@ Rails.application.routes.draw do
   resources :sessions
   resources :librarians
   resources :libraries
+  resources :books
 
   root 'login#index'
 
