@@ -10,7 +10,9 @@
   <%  if !@librarian.nil? %>
     <% @library = Library.find_by_name(@librarian.library) %>
     <% end %>
-  <td><%= link_to 'Edit Library', edit_library_path(@library) %></td><br>
+    <%  if !@library.nil? %>
+      <td><%= link_to 'Edit Library', edit_library_path(@library) %></td><br>
+    <% end %>
 
   </body>
 </html>
