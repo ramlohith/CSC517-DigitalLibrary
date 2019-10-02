@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-
   get 'students/library_list'
   get 'students/books'
   post 'students/history_request', to: 'students#history_request', as: :students_history_request
@@ -8,21 +7,17 @@ Rails.application.routes.draw do
   post 'students/book_return', to: 'students#book_return', as: :students_book_return
   post 'students/delete_reservation', to: 'students#book_delete_reservation', as: :students_book_delete_reservation
 
-  get 'admin/index'
-  resources :libraries
-  resources :books
-
   get 'books/index'
   get 'books/delete'
   post 'books/delete'
   get 'books/show'
-
   get 'books/edit'
   get 'books/show'
   post 'books/show'
 
   get 'libraries/edit'
   get 'libraries/index'
+  get 'libraries/new'
   post '/sessions/create'
   get 'sessions/destroy'
 
@@ -34,21 +29,33 @@ Rails.application.routes.draw do
   get 'admins/index'
   get 'admins/login'
   post 'admins/login'
-  get 'admins/allstudents'
+  get 'admins/users'
   get 'admins/delete'
   post 'admins/delete'
   get 'admins/books_on_hold'
   get 'admins/checked'
   get 'admins/borrow_history'
   get 'admins/overdue'
+  get 'students/:id/edit', to: 'students#admin_edit', as: :admin_edit
+  get 'students/show/:id', to: 'students#admin_show', as: :admin_show
+  post 'students/:id', to: 'students#admin_update', as: :admin_update
 
+  get 'librarians/:id/edit', to: 'librarians#admin_edit_librarian', as: :admin_edit_librarian
+  get 'librarians/show/:id', to: 'librarians#admin_show_librarian', as: :admin_show_librarian
+  post 'librarians/:id', to: 'librarians#admin_update_librarian', as: :admin_update_librarian
+
+  get 'librarians/new'
+  get 'librarians/:id/edit', to: 'librarians#edit', as: :librarian_edit
+  post 'librarians/:id', to: 'librarians#update', as: :librarian_update
   get 'librarians/login'
   post 'librarians/login'
+  get 'librarians/index'
+  post 'librarians/index'
   get 'librarians/books'
   post 'librarians/books'
   get 'librarians/show'
   post 'librarians/show'
-  post  'librarians/destroy'
+  post 'librarians/destroy'
   get 'librarians/checkedout_request', to: 'librarians#checkedout_request', as: :librarians_checkedout_request
   get 'librarians/borrow', to: 'librarians#borrow', as: :librarians_borrow
 
@@ -59,7 +66,10 @@ Rails.application.routes.draw do
   post 'students/login'
   get 'students/delete'
   post 'students/delete'
+  get 'students/admin_edit'
+  post 'students/admin_edit'
   get 'students/:id/edit', to: 'students#edit', as: :edit_student
+
   patch 'students/:id', to: 'students#update'
   get 'students/show'
 

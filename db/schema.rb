@@ -32,24 +32,24 @@ ActiveRecord::Schema.define(version: 2019_10_02_155448) do
   end
 
   create_table "book_requests", force: :cascade do |t|
-    t.string "library_name"
+    t.integer "library_id"
     t.string "isbn"
     t.integer "books_available"
     t.integer "books_checkedout"
     t.integer "books_holdrequest"
-    t.datetime "created_at", precision: 6
-    t.datetime "updated_at", precision: 6
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "bookmarks", force: :cascade do |t|
     t.string "student_name"
     t.string "student_email"
     t.string "isbn"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
     t.string "title"
     t.string "author"
     t.integer "edition"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "books", force: :cascade do |t|
@@ -63,13 +63,13 @@ ActiveRecord::Schema.define(version: 2019_10_02_155448) do
     t.string "subject"
     t.text "summary"
     t.boolean "special"
-    t.datetime "created_at", precision: 6
-    t.datetime "updated_at", precision: 6
     t.string "library"
+    t.string "university"
     t.integer "number_available"
     t.integer "number_checkedout"
     t.integer "number_holdrequest"
-    t.string "university"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.string "image_file_name"
     t.string "image_content_type"
     t.integer "image_file_size"
@@ -82,9 +82,9 @@ ActiveRecord::Schema.define(version: 2019_10_02_155448) do
     t.string "status"
     t.string "student_name"
     t.string "student_email"
+    t.decimal "fines", default: "0.0"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.decimal "fines", default: "0.0"
   end
 
   create_table "hold_requests", force: :cascade do |t|
@@ -114,8 +114,8 @@ ActiveRecord::Schema.define(version: 2019_10_02_155448) do
     t.string "location"
     t.integer "maxdays"
     t.decimal "fine"
-    t.datetime "created_at", precision: 6
-    t.datetime "updated_at", precision: 6
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "students", force: :cascade do |t|
