@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+
   get 'students/library_list'
   get 'students/books'
   post 'students/history_request', to: 'students#history_request', as: :students_history_request
@@ -15,6 +16,10 @@ Rails.application.routes.draw do
   get 'books/delete'
   post 'books/delete'
   get 'books/show'
+
+  get 'books/edit'
+  get 'books/show'
+  post 'books/show'
 
   get 'libraries/edit'
   get 'libraries/index'
@@ -63,6 +68,7 @@ Rails.application.routes.draw do
   resources :sessions
   resources :librarians
   resources :libraries
+  resources :books
   resources :admins
 
   root 'login#index'
