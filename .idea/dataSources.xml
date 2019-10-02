@@ -73,5 +73,11 @@
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql://127.0.0.1:5432/db/production.sqlite3</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="Postgres-Profd" uuid="a4e11ef3-fe82-48cd-b443-fce6522fd816">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://ec2-174-129-27-3.compute-1.amazonaws.com:5432//dtkibvssfpwanq:a688cafe61ddb66831fb9a01a871db757511049ec30399b1d0debbe4b9fd34d1@ec2-174-129-27-3.compute-1.amazonaws.com:5432/d58heqqarbd7re</jdbc-url>
+    </data-source>
   </component>
 </project>
