@@ -6,15 +6,23 @@ Rails.application.routes.draw do
   post 'students/history_request', to: 'students#history_request', as: :students_history_request
   post 'students/bookmark', to: 'students#bookmark', as: :students_bookmark
   post 'students/book_return', to: 'students#book_return', as: :students_book_return
+  post 'students/delete_reservation', to: 'students#book_delete_reservation', as: :students_book_delete_reservation
 
   get 'admin/index'
   resources :libraries
+  resources :books
+
+  get 'books/index'
+  get 'books/delete'
+  post 'books/delete'
+  get 'books/show'
 
   get 'books/edit'
   get 'books/show'
   post 'books/show'
 
   get 'libraries/edit'
+  get 'libraries/index'
   post '/sessions/create'
   get 'sessions/destroy'
 
@@ -22,6 +30,17 @@ Rails.application.routes.draw do
   get 'login/index'
   post 'login/index'
   post 'login/search'
+
+  get 'admins/index'
+  get 'admins/login'
+  post 'admins/login'
+  get 'admins/allstudents'
+  get 'admins/delete'
+  post 'admins/delete'
+  get 'admins/books_on_hold'
+  get 'admins/checked'
+  get 'admins/borrow_history'
+  get 'admins/overdue'
 
   get 'librarians/login'
   post 'librarians/login'
@@ -50,6 +69,7 @@ Rails.application.routes.draw do
   resources :librarians
   resources :libraries
   resources :books
+  resources :admins
 
   root 'login#index'
 

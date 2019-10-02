@@ -1,0 +1,93 @@
+<div class="heading">
+  <h1> Register Book </h1>
+</div>
+
+<div class="msg">
+  <% if flash[:alert] %>
+    <div class="alert"><%= flash[:alert] %></div>
+  <% end %>
+</div>
+<br>
+
+<div class="forms">
+  <%= form_for @book, html: {multipart: true} do |form| %>
+    <p>
+      <%= form.label :isbn %><br>
+      <%= form.text_field :isbn %>
+    </p>
+
+    <p>
+      <%= form.label :title %><br>
+      <%= form.text_field :title %>
+    </p>
+
+    <p>
+      <%= form.label :author %><br>
+      <%= form.text_field :author %>
+    </p>
+
+    <p>
+      <%= form.label :language %><br>
+      <%= form.text_field :language %>
+    </p>
+
+    <p>
+      <%= form.label :published %><br>
+      <%= form.text_field :published %>
+    </p>
+
+    <p>
+      <%= form.label :edition %><br>
+      <%= form.text_field :edition %>
+    </p>
+
+    <p>
+      <%= form.label :image %><br>
+      <%= form.file_field :image %>
+    </p>
+
+    <p>
+      <%= form.label :subject %><br>
+      <%= form.text_field :subject %>
+    </p>
+
+    <p>
+      <%= form.label :summary %><br>
+      <%= form.text_field :summary %>
+    </p>
+
+    <p>
+      <%= form.label :special %><br>
+      <%= form.text_field :special %>
+    </p>
+
+    <p>
+      <%= form.label :library %><br>
+      <%= form.text_field :library %>
+    </p>
+
+    <p>
+      <%= form.label :university %><br>
+      <%= form.text_field :university %>
+    </p>
+
+    <p>
+      <%= form.label :number_avaiable %><br>
+      <%= form.text_field :number_available %>
+    </p>
+
+    <p>
+      <%= form.label :number_checkedout %><br>
+      <%= form.text_field :number_checkedout %>
+    </p>
+    <p>
+      <%= form.label :number_holdrequest %><br>
+      <%= form.text_field :number_holdrequest %>
+    </p>
+
+    <p>
+      <%= form.submit %>
+    </p>
+
+  <% end %>
+</div>

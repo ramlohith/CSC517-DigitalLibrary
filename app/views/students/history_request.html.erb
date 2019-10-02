@@ -36,6 +36,7 @@
       <th scope="col">Status</th>
       <th scope="col">Time Checked out</th>
       <th scope="col">Return</th>
+      <th scope="col">Delete Reservation</th>
     </tr>
     </thead>
     <tbody>
@@ -45,9 +46,24 @@
           <td><%= hist.isbn%></td>
           <td><%= hist.status %></td>
           <td><%= hist.updated_at %></td>
+          <% if hist.status == "Checked Out" %>
           <td><%= link_to students_book_return_path(type: "book_return", :hist_id => hist.id) do %>
             <button>Return</button>
             <%  end  %></td>
+            <%else %>
+            <td><%= link_to students_book_return_path(type: "book_return", :hist_id => hist.id) do %>
+                <button disabled>Return</button>
+              <%  end  %></td>
+            <%end %>
+          <% if hist.status == "Waiting for Approval" %>
+            <td><%= link_to students_book_delete_reservation_path(type: "delete_reservation", :hist_id => hist.id) do %>
+                <button>Delete Reservation</button>
+              <%  end  %></td>
+          <%else %>
+            <td><%= link_to students_book_delete_reservation_path(type: "delete_reservation", :hist_id => hist.id) do %>
+                <button disabled>Delete Reservation</button>
+              <%  end  %></td>
+          <%end %>
         </tr>
       <% end %>
     <% end %>

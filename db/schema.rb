@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_26_011203) do
+ActiveRecord::Schema.define(version: 2019_10_02_155448) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email"
@@ -32,24 +32,24 @@ ActiveRecord::Schema.define(version: 2019_09_26_011203) do
   end
 
   create_table "book_requests", force: :cascade do |t|
-    t.integer "library_id"
+    t.string "library_name"
     t.string "isbn"
     t.integer "books_available"
     t.integer "books_checkedout"
     t.integer "books_holdrequest"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", precision: 6
+    t.datetime "updated_at", precision: 6
   end
 
   create_table "bookmarks", force: :cascade do |t|
     t.string "student_name"
     t.string "student_email"
     t.string "isbn"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.string "title"
     t.string "author"
     t.integer "edition"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "books", force: :cascade do |t|
@@ -58,18 +58,22 @@ ActiveRecord::Schema.define(version: 2019_09_26_011203) do
     t.string "author"
     t.string "language"
     t.string "published"
-    t.datetime "edition"
+    t.integer "edition"
     t.binary "image"
     t.string "subject"
     t.text "summary"
     t.boolean "special"
+    t.datetime "created_at", precision: 6
+    t.datetime "updated_at", precision: 6
     t.string "library"
-    t.string "university"
     t.integer "number_available"
     t.integer "number_checkedout"
     t.integer "number_holdrequest"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.string "university"
+    t.string "image_file_name"
+    t.string "image_content_type"
+    t.integer "image_file_size"
+    t.datetime "image_updated_at"
   end
 
   create_table "history_requests", force: :cascade do |t|
@@ -80,6 +84,7 @@ ActiveRecord::Schema.define(version: 2019_09_26_011203) do
     t.string "student_email"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.decimal "fines", default: "0.0"
   end
 
   create_table "hold_requests", force: :cascade do |t|
@@ -109,8 +114,8 @@ ActiveRecord::Schema.define(version: 2019_09_26_011203) do
     t.string "location"
     t.integer "maxdays"
     t.decimal "fine"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", precision: 6
+    t.datetime "updated_at", precision: 6
   end
 
   create_table "students", force: :cascade do |t|

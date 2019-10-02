@@ -51,7 +51,7 @@
               <td><%= book.language %></td>
               <td><%= book.published %></td>
               <td><%= book.edition %></td>
-              <td><%= book.image %></td>
+              <td><%= image_tag book.image.url(:thumb) %></td>
               <td><%= book.subject %></td>
               <td><%= book.summary %></td>
               <td><%= book.special %></td>

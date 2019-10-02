@@ -12,6 +12,7 @@ class StudentsController < ApplicationController
           break
         elsif book.number_available > 0 && !book.special
           obj = HistoryRequest.new(:library_name => book.library, :isbn => book.isbn, :status => "Checked Out" , :student_name => @student.name , :student_email => @student.email)
+          LibraryMailer.library_mailer(@student).deliver
           book.number_available = book.number_available - 1
           book.number_checkedout = book.number_checkedout + 1
           obj.save
@@ -50,6 +51,20 @@ class StudentsController < ApplicationController
   def index
     @student = Student.find(session[:id])
     @bookmark = Bookmark.where(student_email: @student.email)
+    @history_request = HistoryRequest.where(student_email: @student.email)
+    totalfine = 0
+    if !@history_request.nil?
+      @history_request.each do |hist|
+        @book = Book.where(isbn: hist.isbn).first
+        @library = Library.where(university: @book.university, name: @book.library).first
+        hist = hist.calculatefines(@library.maxdays, @library.fine)
+        totalfine = totalfine + hist.fines
+        hist.save
+      end
+      @history_request_totalfines = HistoryRequest.new(:fines => totalfine)
+      @history_request = HistoryRequest.where("fines > 0", student_email: @student.email)
+      render 'students/index' and return
+    end
   end
 
   def library_list
@@ -94,6 +109,7 @@ class StudentsController < ApplicationController
           if !book_obj.special
             obj = HistoryRequest.where(isbn: book_obj.isbn, student_email: holdreq_obj.student_email ).first
             obj.status = "Checked Out"
+            LibraryMailer.library_mailer(@student).deliver
             book_obj.number_available = book_obj.number_available - 1
             book_obj.number_checkedout = book_obj.number_checkedout + 1
             obj.save
@@ -113,6 +129,15 @@ class StudentsController < ApplicationController
         book_obj.save
         histreq_obj.save
         redirect_to students_books_path(type: "history_request")
+    elsif my_render_type == "delete_reservation"
+      hist_id = params[:hist_id].to_i
+      histreq_obj = HistoryRequest.find(hist_id)
+      histreq_obj.destroy
+      apprvl_obj = ApprovalRequest.where(:student_email => @student.email, :isbn => histreq_obj.isbn).first
+      apprvl_obj.destroy
+      book_obj = Book.where(:isbn => histreq_obj.isbn).first
+      book_obj.number_available = book_obj.number_available + 1
+      book_obj.number_holdrequest = book_obj.number_holdrequest - 1
       else
       render "students/index" #EDIT THIS!!
     end
@@ -123,10 +148,11 @@ class StudentsController < ApplicationController
     if @student.education == "undergrad"
       @student.maxbook = 2
     elsif @student.education == "grad"
-      @student.maxbook= 4
+      @student.maxbook = 4
     elsif @student.education == "phd"
-      @student.maxbook= 6
+      @student.maxbook = 6
     else
+      @student.maxbook = 2
     end
     if @student.save
       redirect_to students_login_url, alert: "Registration Successful, Please login!!"
@@ -144,7 +170,7 @@ class StudentsController < ApplicationController
     @student.destroy
 
     respond_to do |format|
-      format.html { redirect_to login_index_url }
+      format.html { redirect_to admins_allstudents_path}
       format.json { head :no_content }
     end
   end

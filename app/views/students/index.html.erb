@@ -19,13 +19,15 @@
       <li><%= link_to "Libraries", students_library_list_path(type: "library_list")%></li>
       <li><%= link_to "Books", students_books_path(type: "books") %></li>
       <li><%= link_to "Checkout History", students_history_request_path(type: "history_request") %></li>
+      <li><%= link_to "Logout", sessions_destroy_path %></li>
     </ul>
   </div>
 </nav>
 <div class="container">
-  <p>Yet to be determined</p>
+  <p align="right"><%= link_to "Edit Profile", edit_student_path(@student) %> </p>
   <div class="container">
     <table class="table table-striped">
+      <caption>Books Bookmarked</caption>
       <thead>
       <tr>
         <th scope="col">ISBN</th>
@@ -47,6 +49,36 @@
       </tbody>
     </table>
   </div>
+  <div class="container">
+    <pre>
+    <h2> <%="Total Fines Due: "+ @history_request_totalfines.fines.to_s %></h2>
+    </pre>
+    <table class="table table-striped">
+      <caption>List of Fines</caption>
+      <thead>
+      <tr>
+        <th scope="col">Library</th>
+        <th scope="col">ISBN</th>
+        <th scope="col">Status</th>
+        <th scope="col">Time Checked out</th>
+        <th scope="col">Fine</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% if !@history_request.nil? then @history_request.each do |hist| %>
+          <tr>
+            <td><%= hist.library_name %></td>
+            <td><%= hist.isbn%></td>
+            <td><%= hist.status %></td>
+            <td><%= hist.updated_at %></td>
+            <td><%= hist.fines %></td>
+          </tr>
+        <% end %>
+      <% end %>
+      </tbody>
+    </table>
   </div>
+
+</div>
 </body>
 </html>

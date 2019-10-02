@@ -1,0 +1,51 @@
+<div class="heading">
+  <h1>Listing Books</h1>
+</div>
+<br/>
+
+<div class="table">
+  <table>
+    <tr>
+      <th> ISBN </th>
+      <th> Title </th>
+      <th> Author </th>
+      <th> Language </th>
+      <th> Published </th>
+      <th> Edition </th>
+      <th> Image </th>
+      <th> Subject </th>
+      <th> Summary </th>
+      <th> special </th>
+      <th> Library </th>
+      <th> University </th>
+      <th> Instock </th>
+      <th> Checked </th>
+      <th> Hold Requests </th>
+      <th> </th>
+    </tr>
+    <%= @books.each do |book| %>
+      <tr>
+        <td><%= book.isbn %></td>
+        <td><%= book.title %></td>
+        <td><%= book.author %></td>
+        <td><%= book.language %></td>
+        <td><%= book.published %></td>
+        <td><%= book.edition %></td>
+        <td><%= image_tag book.image.url(:thumb) %></td>
+        <td><%= book.subject %></td>
+        <td><%= book.summary %></td>
+        <td><%= book.special %></td>
+        <td><%= book.library %></td>
+        <td><%= book.university %></td>
+        <td><%= book.number_available %></td>
+        <td><%= book.number_checkedout %></td>
+        <td><%= book.number_holdrequest%></td>
+        <td><%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </table>
+  <br/>
+  <%= link_to 'New Book', new_book_path %>
+</div>
+
+

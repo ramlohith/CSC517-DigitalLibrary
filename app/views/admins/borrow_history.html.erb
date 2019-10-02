@@ -1,0 +1,30 @@
+<div class="heading">
+  <h1>Borrow History</h1>
+</div>
+<br/>
+
+<div class="table">
+  <table>
+    <thead>
+    <tr>
+      <th>ISBN</th>
+      <th> Library </th>
+      <th>Held By</th>
+      <th> Email </th>
+      <th></th>
+    </tr>
+    </thead>
+    <% if !@borrowbooks.nil? then @borrowbooks.each do |r| %>
+        <tbody>
+        <tr>
+          <td><%= link_to r.isbn, books_show_path(:book_id => r.isbn) %></td>
+          <td><%= r.library_name %>
+          <td><%= r.student_name %></td>
+          <td><%= r.student_email %></td>
+        </tr>
+        </tbody>
+      <% end %>
+    <%end %>
+  </table>
+  <br/>
+</div>

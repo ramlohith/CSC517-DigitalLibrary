@@ -6,7 +6,7 @@ class CreateHistoryRequests < ActiveRecord::Migration[6.0]
       t.string :status
       t.string :student_name
       t.string :student_email
-
+      t.numeric :fines
       t.timestamps
     end
   end
