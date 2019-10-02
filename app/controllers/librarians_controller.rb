@@ -29,7 +29,6 @@ class LibrariansController < ApplicationController
     @books = Book.all
   end
 
-
   def index
 
   end
@@ -43,7 +42,6 @@ class LibrariansController < ApplicationController
     end
     end
   end
-
 
   def destroy
     bookid = params[:book_id]

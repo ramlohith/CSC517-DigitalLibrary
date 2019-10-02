@@ -53,45 +53,28 @@ ActiveRecord::Schema.define(version: 2019_09_29_044954) do
   end
 
   create_table "book_requests", force: :cascade do |t|
-    t.string "library_name"
+    t.integer "library_id"
     t.string "isbn"
     t.integer "books_available"
     t.integer "books_checkedout"
     t.integer "books_holdrequest"
-    t.datetime "created_at", precision: 6
-    t.datetime "updated_at", precision: 6
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "bookmarks", force: :cascade do |t|
     t.string "student_name"
     t.string "student_email"
     t.string "isbn"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
     t.string "title"
     t.string "author"
     t.integer "edition"
-  end
-
-  create_table "books", force: :cascade do |t|
-    t.string "isbn"
-    t.string "title"
-    t.string "author"
-    t.string "language"
-    t.string "published"
-    t.datetime "edition"
-    t.binary "image"
-    t.string "subject"
-    t.text "summary"
-    t.boolean "special"
-    t.string "library"
-    t.string "university"
-    t.integer "number_available"
-    t.integer "number_checkedout"
-    t.integer "number_holdrequest"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
+
+# Could not dump table "books" because of following StandardError
+#   Unknown type 'avatar' for column 'image'
 
   create_table "history_requests", force: :cascade do |t|
     t.string "library_name"
@@ -101,6 +84,7 @@ ActiveRecord::Schema.define(version: 2019_09_29_044954) do
     t.string "student_email"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.decimal "fines"
   end
 
   create_table "hold_requests", force: :cascade do |t|
@@ -130,8 +114,8 @@ ActiveRecord::Schema.define(version: 2019_09_29_044954) do
     t.string "location"
     t.integer "maxdays"
     t.decimal "fine"
-    t.datetime "created_at", precision: 6
-    t.datetime "updated_at", precision: 6
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "students", force: :cascade do |t|

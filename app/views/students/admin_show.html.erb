@@ -1,0 +1,44 @@
+<div class="heading">
+  <h1>Student Profile </h1>
+</div>
+
+<div class="msg">
+  <% if flash[:alert] %>
+    <div class="alert"><%= flash[:alert] %></div>
+  <% end %>
+</div>
+<br>
+
+<div class="msg">
+  <ul>
+    <% @student.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+</div>
+
+<div class="forms">
+  <%= form_for @student do |form| %>
+
+    <p>
+      <%= form.label :email %><br>
+      <%= @student.email %>
+    </p>
+
+    <p>
+      <%= form.label :name %><br>
+      <%= @student.name %>
+    </p>
+
+    <p>
+      <%= form.label :education %><br>
+      <%= @student.education %>
+    </p>
+
+    <p>
+      <%= form.label :university %><br>
+      <%= @student.university %>
+    </p>
+
+  <% end %>
+</div>
