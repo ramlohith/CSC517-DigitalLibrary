@@ -55,11 +55,7 @@ class LibrariansController < ApplicationController
       format.json { head :no_content }
     end
   end
-
-
-  def index
-
-  end
+  
 
   def create
     @librarian = Librarian.new(librarian_params)
