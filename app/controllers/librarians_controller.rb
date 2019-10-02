@@ -46,6 +46,16 @@ class LibrariansController < ApplicationController
     @books = Book.all
   end
 
+  def destroy
+    bookid = params[:book_id]
+    @book = Book.find(bookid)
+    @book.destroy
+    respond_to do |format|
+      format.html { redirect_to librarians_path, notice: 'Book was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  end
+
 
   def index
 
@@ -58,16 +68,6 @@ class LibrariansController < ApplicationController
     else
       redirect_to new_librarian_path, alert: "OOPS!! Problem Occurred. Please enter details again!"
     end
-    end
-  end
-
-  def destroy
-    bookid = params[:book_id]
-    @book = Book.find(bookid)
-    @book.destroy
-    respond_to do |format|
-      format.html { redirect_to librarians_path, notice: 'Book was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 
