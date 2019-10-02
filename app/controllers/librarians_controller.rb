@@ -46,7 +46,6 @@ class LibrariansController < ApplicationController
     @books = Book.all
   end
 
-
   def index
 
   end
