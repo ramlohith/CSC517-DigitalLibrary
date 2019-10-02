@@ -20,15 +20,13 @@ class AdminsController < ApplicationController
     end
   end
 
-  def allstudents
+  def users
     @students = Student.all
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @students }
     end
-  end
 
-  def allstaff
     @librarians = Librarian.all
     respond_to do |format|
       format.html # index.html.erb

@@ -23,7 +23,7 @@
       <th> Hold Requests </th>
       <th> </th>
     </tr>
-    <%= @books.each do |book| %>
+    <%= if !@books.nil? then @books.each do |book| %>
       <tr>
         <td><%= book.isbn %></td>
         <td><%= book.title %></td>
@@ -42,6 +42,7 @@
         <td><%= book.number_holdrequest%></td>
         <td><%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
+    <% end %>
     <% end %>
   </table>
   <br/>

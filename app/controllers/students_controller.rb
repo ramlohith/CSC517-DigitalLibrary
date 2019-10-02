@@ -189,6 +189,31 @@ class StudentsController < ApplicationController
     end
   end
 
+  def admin_edit
+    @student = Student.find(params[:id])
+  end
+
+  def admin_show
+    @student = Student.find(params[:id])
+  end
+
+  def admin_update
+    @student = Student.find(params[:id])
+    respond_to do |format|
+      if @student.update(email: params[:student][:email], name: params[:student][:name],
+                         password: params[:student][:password],
+                         education: params[:student][:education],
+                         university: params[:student][:education]
+      )
+        format.html { render 'admins/index', alert: 'Student successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @student.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   private
   def student_params
     params.require(:student).permit(:email, :name, :password, :education, :university)

@@ -1,0 +1,55 @@
+<div class="heading">
+  <h1>Users</h1>
+</div>
+<br/>
+
+<h2> Students </h2>
+<div class="table">
+  <table>
+    <tr>
+      <th>Email</th>
+      <th>Name</th>
+      <th>Education</th>
+      <th>University</th>
+      <th>Edit</th>
+      <th>Show</th>
+    </tr>
+
+    <% @students.each do |s| %>
+      <tr>
+        <td><%= s.email %></td>
+        <td><%= s.name %></td>
+        <td><%= s.education %></td>
+        <td><%= s.university %></td>
+        <td><%= link_to 'Edit', admin_edit_path(s) %></td>
+        <td><%= link_to 'Show', admin_show_path(s) %></td>
+      </tr>
+    <% end %>
+  </table>
+  <br/>
+</div>
+
+<h2> Librarian </h2>
+<div class="table">
+  <table>
+    <tr>
+      <th>Email</th>
+      <th>Name</th>
+      <th>Library</th>
+      <th>Edit</th>
+      <th>Show</th>
+    </tr>
+
+    <% @librarians.each do |l| %>
+      <tr>
+        <td><%= l.email %></td>
+        <td><%= l.name %></td>
+        <td><%= l.library %></td>
+        <td><%= link_to 'Edit', admin_edit_librarian_path(l) %></td>
+        <td><%= link_to 'Show', admin_show_librarian_path(l) %></td>
+      </tr>
+    <% end %>
+  </table>
+  <br/>
+</div>
+
