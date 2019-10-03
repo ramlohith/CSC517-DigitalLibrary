@@ -4,7 +4,37 @@ class LibrariesController < ApplicationController
   end
 
   def show
+    @libraries = Library.all
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @libraries }
+    end
+  end
 
+  def index
+    @libraries = Library.all
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @libraries }
+    end
+
+  end
+
+  def new
+    @library = Library.new
+    respond_to do |format|
+      format.html # new.html.erb
+      format.json { render json: @library }
+    end
+  end
+
+  def create
+    @library = Library.new(library_param)
+    if @library.save
+      redirect_to admins_index_path, alert: "Library successfully created!!"
+    else
+      redirect_to new_library_path, alert: "OOPS!! Problem Occurred. Please enter details again!"
+    end
   end
 
   def update

@@ -6,7 +6,7 @@
   <td><%= link_to "View Hold Request", librarians_show_path%></td><br>
   <td><%= link_to "View Checkedout", librarians_checkedout_request_path%></td><br>
   <td><%= link_to "View BorrowingHistory", librarians_borrow_path%></td><br>
-  <td><%= link_to 'Edit My profile', edit_librarian_path(session[:id]) %></td><br>
+  <td><%= link_to 'Edit My profile', librarian_edit_path(session[:id]) %></td><br>
   <%  if !@librarian.nil? %>
     <% @library = Library.find_by_name(@librarian.library) %>
     <% end %>

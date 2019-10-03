@@ -1,52 +1,80 @@
-<!DOCTYPE html>
-<html lang="en">
 <div class="heading">
-  <h1>Listing Books</h1>
+  <h1>Show Book</h1>
 </div>
 <br/>
 
-<div class="table">
-  <table>
-    <tr>
-      <th> ISBN </th>
-      <th> Title </th>
-      <th> Author </th>
-      <th> Language </th>
-      <th> Published </th>
-      <th> Edition </th>
-      <th> Image </th>
-      <th> Subject </th>
-      <th> Summary </th>
-      <th> special </th>
-      <th> Library </th>
-      <th> University </th>
-      <th> Instock </th>
-      <th> Checked </th>
-      <th> Hold Requests </th>
-      <th> </th>
-    </tr>
 
-      <tr>
-        <td><%= @book.isbn %></td>
-        <td><%= @book.title %></td>
-        <td><%= @book.author %></td>
-        <td><%= @book.language %></td>
-        <td><%= @book.published %></td>
-        <td><%= @book.edition %></td>
-        <td><%= image_tag @book.image.url(:thumb) %></td>
-        <td><%= @book.subject %></td>
-        <td><%= @book.summary %></td>
-        <td><%= @book.special %></td>
-        <td><%= @book.library %></td>
-        <td><%= @book.university %></td>
-        <td><%= @book.number_available %></td>
-        <td><%= @book.number_checkedout %></td>
-        <td><%= @book.number_holdrequest%></td>
-      </tr>
+<p>
+  <strong>isbn:</strong>
+  <%= @book.isbn %>
+</p>
 
-  </table>
-  <br/>
+<p>
+  <strong>title:</strong>
+  <%= @book.title %>
+</p>
 
-</div>
+<p>
+  <strong>author:</strong>
+  <%= @book.author %>
+</p>
 
-</html>
+<p>
+  <strong>language:</strong>
+  <%= @book.language %>
+</p>
+
+<p>
+  <strong>published:</strong>
+  <%= @book.published %>
+</p>
+
+<p>
+  <strong>edition:</strong>
+  <%= @book.edition %>
+</p>
+
+<p>
+  <strong>image:</strong>
+  <%= image_tag @book.image.url(:thumb) %>
+</p>
+
+<p>
+  <strong>subject:</strong>
+  <%= @book.subject %>
+</p>
+
+<p>
+  <strong>summary:</strong>
+  <%= @book.summary %>
+</p>
+
+<p>
+  <strong>special:</strong>
+  <%= @book.special %>
+</p>
+
+<p>
+  <strong>library:</strong>
+  <%= @book.library %>
+</p>
+
+<p>
+  <strong>university:</strong>
+  <%= @book.university %>
+</p>
+
+<p>
+  <strong>number_avaiable:</strong>
+  <%= @book.number_available %>
+</p>
+
+<p>
+  <strong>number_checkedout:</strong>
+  <%= @book.number_checkedout %>
+</p>
+
+<p>
+  <strong>number_holdrequest:</strong>
+  <%= @book.number_holdrequest %>
+</p>
