@@ -38,6 +38,7 @@
         <th scope="col">Subject</th>
         <th scope="col">Summary</th>
         <th scope="col">Special?</th>
+        <th scope="col"> Hold Requests</th>
         <th data-sort-ignore="true">Checkout</th>
         <th scope="col">Bookmark</th>
       </tr>
@@ -55,6 +56,7 @@
             <td><%= book.subject %></td>
             <td><%= book.summary %></td>
             <td><%= book.special %></td>
+            <td><%= book.number_holdrequest %></td>
             <%if book.university == @student.university %>
             <td><%= check_box_tag "book_ids[]", book.id, false, class: 'selectable' %>
             </td>
