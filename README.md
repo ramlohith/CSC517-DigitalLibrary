@@ -4,3 +4,4 @@ Preconfigured admin details:
 UserName: admin@digitallibrary.com
 Password: a
 
+It is advised that the signup, for students especially, is done using actual email id's for email notification upon checkout of a book. 
