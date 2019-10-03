@@ -7,7 +7,7 @@ class StudentsController < ApplicationController
       checkout_list = params[:book_ids].collect {|id| id.to_i}
       checkout_list.each do |id|
         book = Book.find(id)
-        if historyreq.count > 5
+        if historyreq.count > @student.maxbook
           flash[:alert] = "Maximum checkout books already reached!"
           break
         elsif book.number_available > 0 && !book.special
@@ -63,7 +63,7 @@ class StudentsController < ApplicationController
       end
       @history_request_totalfines = HistoryRequest.new(:fines => totalfine)
       @history_request = HistoryRequest.where("fines > 0", student_email: @student.email)
-      render 'students/index' and return
+      render 'students/index'
     end
   end
 
@@ -72,6 +72,7 @@ class StudentsController < ApplicationController
   end
   def books
     @books = Book.all
+    @student = Student.find(session[:id])
   end
 
   def bookmark
@@ -81,13 +82,7 @@ class StudentsController < ApplicationController
   def show
     @student = Student.find(session[:id])
     my_render_type = params[:type]
-    if my_render_type == "library_list"
-      @libraries = Library.all
-      render "students/library_list"
-    elsif my_render_type == "books"
-      @books = Book.all
-      render "students/books"
-    elsif my_render_type == "history_request"
+    if my_render_type == "history_request"
       @hist_req = HistoryRequest.where(student_email:@student.email).order(updated_at: :desc)
       render "students/history_request"
     elsif my_render_type == "bookmark"

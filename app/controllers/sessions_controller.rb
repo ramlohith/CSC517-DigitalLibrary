@@ -10,7 +10,6 @@ class SessionsController < ApplicationController
   def create
     url = Rails.application.routes.recognize_path(request.referrer)   #fetch where the call is coming from
     last_controller = url[:controller]
-
 #student logged in not librarian
     if last_controller == "students"
       @student = Student.find_by_email(log_params[:email])

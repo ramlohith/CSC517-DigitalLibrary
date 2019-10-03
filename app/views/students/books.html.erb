@@ -25,47 +25,51 @@
 <div class="container">
   <input class='form-control' id='myInput' type='text' placeholder='Search for book from table'>
   <%= form_tag students_history_request_path do %>
-      <table class='table table-striped'>
-        <thead>
+    <table class='table table-striped'>
+      <thead>
+      <tr>
+        <th scope="col">ISBN</th>
+        <th scope="col">Title</th>
+        <th scope="col">Author</th>
+        <th scope="col">Language</th>
+        <th scope="col">Published</th>
+        <th scope="col">Edition</th>
+        <th scope="col">Image</th>
+        <th scope="col">Subject</th>
+        <th scope="col">Summary</th>
+        <th scope="col">Special?</th>
+        <th data-sort-ignore="true">Checkout</th>
+        <th scope="col">Bookmark</th>
+      </tr>
+      </thead>
+      <tbody id="myTable">
+      <%= if !@books.nil? then @books.each do |book| %>
           <tr>
-            <th scope="col">ISBN</th>
-            <th scope="col">Title</th>
-            <th scope="col">Author</th>
-            <th scope="col">Language</th>
-            <th scope="col">Published</th>
-            <th scope="col">Edition</th>
-            <th scope="col">Image</th>
-            <th scope="col">Subject</th>
-            <th scope="col">Summary</th>
-            <th scope="col">Special?</th>
-            <th data-sort-ignore="true">Checkout</th>
-            <th scope="col">Bookmark</th>
+            <td><%= book.isbn %></td>
+            <td><%= book.title%></td>
+            <td><%= book.author %></td>
+            <td><%= book.language %></td>
+            <td><%= book.published %></td>
+            <td><%= book.edition %></td>
+            <td><%= image_tag book.image.url(:thumb) %></td>
+            <td><%= book.subject %></td>
+            <td><%= book.summary %></td>
+            <td><%= book.special %></td>
+            <%if book.university == @student.university %>
+            <td><%= check_box_tag "book_ids[]", book.id, false, class: 'selectable' %>
+            </td>
+              <%else %>
+              <td></td>
+              <%end %>
+            <td><%= link_to students_bookmark_path(type: "bookmark", :book_id => book.id) do %>
+                <button>BookMark</button>
+              <% end %></td>
           </tr>
-        </thead>
-        <tbody id="myTable">
-          <%= if !@books.nil? then @books.each do |book| %>
-             <tr>
-              <td><%= book.isbn %></td>
-              <td><%= book.title%></td>
-              <td><%= book.author %></td>
-              <td><%= book.language %></td>
-              <td><%= book.published %></td>
-              <td><%= book.edition %></td>
-              <td><%= image_tag book.image.url(:thumb) %></td>
-              <td><%= book.subject %></td>
-              <td><%= book.summary %></td>
-              <td><%= book.special %></td>
-              <td><%= check_box_tag "book_ids[]", book.id, false, class: 'selectable' %>
-              </td>
-               <td><%= link_to students_bookmark_path(type: "bookmark", :book_id => book.id) do %>
-                   <button>BookMark</button>
-                 <% end %></td>
-             </tr>
         <% end %>
       <% end %>
   <% end %>
-        </tbody>
-      </table>
+  </tbody>
+  </table>
   </form>
   <%= submit_tag "check out", :class => 'btn btn-primary btn-xs' %>
   <script>
