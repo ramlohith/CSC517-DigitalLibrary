@@ -6,7 +6,7 @@
     <th scope="col">Library</th>
     <th scope="col">ISBN</th>
     <th scope="col">Status</th>
-    <th scope="col">Time Checked out</th>
+    <th colspan="1"></th>
   </tr>
   </thead>
 
@@ -16,7 +16,7 @@
       <td><%= hist.library_name %></td>
       <td><%= hist.isbn%></td>
       <td><%= hist.status %></td>
-      <td><%= hist.updated_at %></td>
+      <td><%= link_to 'Approve'%></td>
     </tr>
   <%end %>
   </tbody>

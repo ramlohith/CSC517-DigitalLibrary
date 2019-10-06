@@ -55,6 +55,13 @@ class LibrariansController < ApplicationController
       format.json { render json: @librarian }
     end
   end
+
+  def fine
+    @librarian = Librarian.find(session[:id])
+    @finepay = HistoryRequest.where("fines > 0").where(:library_name=> @librarian.library)
+    render "librarians/fine"
+  end
+
   def show
     @librarian = Librarian.find(session[:id])
     @hold = HistoryRequest.where(:library_name=>@librarian.library,:status=>"Waiting for Approval")
