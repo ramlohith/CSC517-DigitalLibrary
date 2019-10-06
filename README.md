@@ -3,28 +3,36 @@
 * Ruby version:
 ruby 2.6.3p62 (2019-04-16 revision 67580) [x64-mingw32]
 
+We will follow a particular sequence to test all the functionalities:
+Starting with the Admin:
+
 Functionalities of Admin -
-> Log in with an email and password
+1) Log in with an email and password:
+As the admin credentials are preconfigured, Please use the following credentials to login
+ 
+ Username: admin@digitallibrary.com 
+ Password: a
 
-> Edit profile
+2) Edit profile: we can edit the admin profile, can change the admins mail id and password if required. We are providing multiple credentials for admin so that even if any user changes the credentials we can use other credentials to login.
 
-> Create/Modify Librarian or Student accounts - On the homepage, you will find options to create/update a student or a librarian.
 
-> Create/Modify/Delete Libraries and Books.- select show libraries on homepage and then you will find these options under the details page.
+3) Create/Modify Librarian or Student accounts - Please select the Librarian or the student tab and under those tabs you need to login using their credentials and then you can edit their profiles.
 
-> View the list of users (students and librarians) and their profile details (except password) - under show students/librarian
+4) Create/Modify/Delete Libraries and Books.- You can find it under the libraries and books tab.
 
-> View the list of books, along with detailed information.
+5) View the list of users (students and librarians) - under the Users tab you can see the details of the students and librarians except their passwords.
 
-> View the list of book hold requests.
+6) View the list of books, along with detailed information- we can find this under the books tab which shows the information of each book.
 
-> View the list of Checked out books.
+7) View the list of book hold requests- under the Books On Hold tab.
 
-> View the list of students with books overdue (along with overdue fines). - select checked out books which will display dues for all the students alongwith the book they borrowed.
+8) View the list of Checked out books- under the Checked Out Books tab.
 
-> View the borrowing history of each book. - Under show books, if you select a particular book to display, it will give you an option to see the borrowing history of that book.
+9) View the list of students with books overdue (along with overdue fines). - we can see this under the overdue fine.
 
-> Delete Student/Book/Librarian from the system - This functionality hasn't been implemented thoroughly yet.
+10) View the borrowing history of each book. - Under the Book History tab we can see the entire borrowing history of each book.
+
+11) Delete Student/Book/Librarian from the system - we can delete a book under the Books tab for each book by clicking on the destroy tab.
 
 Functionalities of Librarian -
 
