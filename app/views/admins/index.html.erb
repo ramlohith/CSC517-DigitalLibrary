@@ -2,8 +2,11 @@
   <h1> Welcome Admin </h1>
 </div>
 <p align="right", style="align-content: end; font-family: Arial; font-size: medium" >
-  <%= link_to "Logout", sessions_destroy_path  %> </p>
+  <%=link_to "Edit Profile", admins_profile_edit_path(session[:id]) %>
+  <%= link_to "Logout", sessions_destroy_path  %>
+</p>
 
+<br/>
 <div class="msg">
   <% if flash[:alert] %>
     <p id="notice"><%= flash[:alert] %></p>
@@ -11,18 +14,33 @@
 </div>
 <br>
 
-<div class="admin">
-  <p align="center"><table>
-<tr>
-  <th><%= link_to "Student", students_login_url  %> </th>
-  <th><%= link_to "Librarian", librarians_login_url %> </th>
-  <th><%= link_to "Libraries", libraries_index_url%> </th>
-  <th><%= link_to "Books", books_index_url %> </th>
-  <th><%= link_to "Users", admins_users_url %> </th>
-  <th><%= link_to "Books On Hold", admins_books_on_hold_path %> </th>
-  <th><%= link_to "Checked Out Books", admins_checked_path %> </th>
-  <th><%= link_to "Books History", admins_borrow_history_path %> </th>
-  <th><%= link_to "Overdue Fine", admins_overdue_path %> </th>
-</tr>
-</table></p>
+<div class="tab">
+  <p align="left">
+  <table>
+  <tr>
+    <th><%= link_to "Impersonate Student? ", students_login_path%> </th>
+    <th><%= link_to "Impersonate Librarian?", librarians_login_path %> </th>
+    <th><%= link_to "Unapproved Librarian", admins_approval_path %> </th>
+    <th><%= link_to "Libraries", libraries_index_url%> </th>
+    <th><%= link_to "Books", books_index_url %> </th>
+    <th><%= link_to "Users", admins_users_path %> </th>
+    <th><%= link_to "Books On Hold", admins_books_on_hold_path %> </th>
+    <th><%= link_to "Checked Out Books", admins_checked_path %> </th>
+    <th><%= link_to "Overdue Fine", admins_overdue_path %> </th>
+  </tr>
+
+</table>
+  </p>
+  <h2> New Registration? </h2>
+  <p class="admin">
+    <p align="left"><table>
+    <tr>
+      <th><%= link_to "New Student Registration", new_student_path%>
+      <th><%= link_to "New Librarian Registration", new_librarian_path%>
+      <th><%= link_to "Add New Library", new_library_path%>
+      <th><%= link_to "Add New Book", new_book_path%>
+    </tr>
+  </table></p>
+  </div>
+
 </div>

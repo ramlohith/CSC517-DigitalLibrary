@@ -1,1 +1,21 @@
-<h1> overdue </h1>
+<h1>Students With Overdue Fines</h1>
+
+<table>
+  <thead>
+  <tr>
+    <th scope="col">ISBN</th>
+    <th scope="col">StudentName</th>
+    <th scope="col">Fine</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @finepay.each do |h| %>
+    <tr>
+      <td><%= h.isbn%></td>
+      <td><%= h.student_name %></td>
+      <td><%= h.fines %></td>
+    </tr>
+  <%end %>
+  </tbody>
+</table>

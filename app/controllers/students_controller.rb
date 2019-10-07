@@ -12,6 +12,7 @@ class StudentsController < ApplicationController
           break
         elsif book.number_available > 0 && !book.special
           obj = HistoryRequest.new(:library_name => book.library, :isbn => book.isbn, :status => "Checked Out" , :student_name => @student.name , :student_email => @student.email)
+          LibraryMailer.library_mailer(@student).deliver
           book.number_available = book.number_available - 1
           book.number_checkedout = book.number_checkedout + 1
           obj.save
@@ -50,6 +51,20 @@ class StudentsController < ApplicationController
   def index
     @student = Student.find(session[:id])
     @bookmark = Bookmark.where(student_email: @student.email)
+    @history_request = HistoryRequest.where(student_email: @student.email)
+    totalfine = 0
+    if !@history_request.nil?
+      @history_request.each do |hist|
+        @book = Book.where(isbn: hist.isbn).first
+        @library = Library.where(university: @book.university, name: @book.library).first
+        hist = hist.calculatefines(@library.maxdays, @library.fine)
+        totalfine = totalfine + hist.fines
+        hist.save
+      end
+      @history_request_totalfines = HistoryRequest.new(:fines => totalfine)
+      @history_request = HistoryRequest.where("fines > 0", student_email: @student.email)
+      render 'students/index' and return
+    end
   end
 
   def library_list
@@ -94,6 +109,7 @@ class StudentsController < ApplicationController
           if !book_obj.special
             obj = HistoryRequest.where(isbn: book_obj.isbn, student_email: holdreq_obj.student_email ).first
             obj.status = "Checked Out"
+            LibraryMailer.library_mailer(@student).deliver
             book_obj.number_available = book_obj.number_available - 1
             book_obj.number_checkedout = book_obj.number_checkedout + 1
             obj.save
@@ -161,6 +177,7 @@ class StudentsController < ApplicationController
 
   def update
     @student = Student.find(params[:id])
+
     respond_to do |format|
       if @student.update(email: params[:student][:email], name: params[:student][:name], password: params[:student][:password])
         format.html { render 'students/index', alert: 'Student successfully updated.' }
@@ -182,24 +199,23 @@ class StudentsController < ApplicationController
 
   def admin_update
     @student = Student.find(params[:id])
-      respond_to do |format|
-        if @student.update(email: params[:student][:email], name: params[:student][:name],
-                           password: params[:student][:password],
-                           education: params[:student][:education],
-                           university: params[:student][:education]
-        )
-          format.html { render 'admins/index', alert: 'Student successfully updated.' }
-          format.json { head :no_content }
-        else
-          format.html { render action: "edit" }
-          format.json { render json: @student.errors, status: :unprocessable_entity }
-        end
+    respond_to do |format|
+      if @student.update(email: params[:student][:email], name: params[:student][:name],
+                         password: params[:student][:password],
+                         education: params[:student][:education],
+                         university: params[:student][:education]
+      )
+        format.html { redirect_to admins_users_path, alert: 'Student successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @student.errors, status: :unprocessable_entity }
       end
+    end
   end
 
   private
   def student_params
     params.require(:student).permit(:email, :name, :password, :education, :university)
   end
-
   end

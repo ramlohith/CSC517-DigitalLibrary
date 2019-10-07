@@ -14,6 +14,8 @@
       <th scope="col">Summary</th>
       <th scope="col">Special?</th>
       <th scope="col">Delete</th>
+      <th scope="col">Edit</th>
+      <th scope="col">Show</th>
       <th colspan="1"></th>
     </tr>
   </thead>
@@ -27,11 +29,13 @@
          <td><%= book.language %></td>
          <td><%= book.published %></td>
          <td><%= book.edition %></td>
-         <td><%= book.image %></td>
+         <td><%= image_tag book.image.url(:thumb) %></td>
          <td><%= book.subject %></td>
          <td><%= book.summary %></td>
          <td><%= book.special %></td>
          <td><%= link_to 'Destroy', librarians_destroy_path(:book_id => book.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+         <td><%= link_to 'Edit', books_edit_path(:book_id => book.id) %></td>
+         <td><%= link_to 'Show', books_show_path(:book_id => book.id) %></td>
        </tr>
   <%end %>
   </tbody>

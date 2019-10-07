@@ -3,7 +3,7 @@
 </div>
 <br/>
 
-<div class="table">
+<div class="admin">
   <table>
     <thead>
     <tr>
@@ -17,7 +17,7 @@
         <th></th>
     </tr>
     </thead>
-    <% @h_requests.each do |r| %>
+    <% if !@h_requests.nil? then @h_requests.each do |r| %>
       <tbody>
       <tr>
         <td><%= r.isbn %></td>
@@ -29,6 +29,7 @@
         <td><%= r.student_email %></td>
       </tr>
       </tbody>
+    <% end %>
     <% end %>
   </table>
   <br/>

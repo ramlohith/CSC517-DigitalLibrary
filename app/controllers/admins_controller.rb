@@ -33,19 +33,40 @@ class AdminsController < ApplicationController
       format.json { render json: @librarians }
     end
   end
+def edit
+  @admin = Admin.find(params[:id])
+end
+
+  def update
+    @admin = Admin.find(params[:id])
+    respond_to do |format|
+      if @admin.update(email: params[:admin][:email],name: params[:admin][:name],password: params[:admin][:password])
+        format.html { redirect_to admins_index_url, alert: 'Admin was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action:"edit" }
+        format.json { render json: @admin.errors, status: :unprocessable_entity }
+      end
+    end
+  end
 
   def destroy
-    @student = Student.find(params[:id])
-    @librarian = Librarian.find(params[:id])
-    if @student != nil?
+    studentid = params[:student_id]
+    libid = params[:lib_id]
+    if !studentid.nil?
+      @student = Student.find(studentid)
       @student.destroy
-    elsif @librarian !=nil?
+      respond_to do |format|
+        format.html { redirect_to admins_users_path, alert: "Student Deleted!" }
+        format.json { head :no_content }
+      end
+    elsif !libid.nil?
+      @librarian = Librarian.find(libid)
       @librarian.destroy
-     end
-
-    respond_to do |format|
-      format.html { redirect_to admins_index_path }
-      format.json { head :no_content }
+      respond_to do |format|
+        format.html { redirect_to admins_users_path, alert: "Librarian Deleted!" }
+        format.json { head :no_content }
+      end
     end
   end
 
@@ -66,19 +87,56 @@ class AdminsController < ApplicationController
   end
 
   def borrow_history
-  @borrowbooks = HistoryRequest.all.group(:isbn, :student_email)
-  respond_to do |format|
-    format.html # index.html.erb
-    format.json { render json: @borrowbooks }
-  end
+    bookisbn = params[:book_isbn]
+    if !bookisbn.nil?
+      @borrowbooks = HistoryRequest.where(isbn: bookisbn)
+      respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @borrowbooks }
+      end
+    end
   end
 
   def overdue
-    @overdues = HistoryRequest.all.group(:isbn, :student_email)
+    @finepay = HistoryRequest.where("fines > 0")
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @overdues }
+      format.json { render json: @finepay }
     end
+  end
+
+  def approval
+    @approvals = Librarian.where(status: "no")
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @approvals}
+    end
+  end
+
+  def approved
+    lib = params[:lib_email]
+    if !lib.nil?
+      @librarian = Librarian.find_by_email(lib)
+      if !@librarian.nil?
+        @librarian.status= "yes"
+        @librarian.password_digest = "$2a$12$HWPzlzLwJgPMkp9ro3dQzuTTLqiAe8V2IDy52dzA3WCf7faKeDdu"
+        @librarian.save!
+#          if @librarian.update!(status: "yes")
+            respond_to do |format|
+            format.html # index.html.erb
+            format.json { render json: @librarian}
+            end
+        # end
+      else
+        redirect_to admins_approval_path, alert: "not happening cus no value in library"
+      end
+    else
+      redirect_to admins_approval_path, alert: "not happening #{lib}"
+    end
+  end
+
+  def admin_edit_librarian
+    @librarian = Librarian.find(params[:id])
   end
 
   private

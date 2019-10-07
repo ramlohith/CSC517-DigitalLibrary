@@ -3,8 +3,16 @@
 </div>
 <br/>
 
+<br>
+<div class="msg">
+  <% if flash[:alert] %>
+    <p id="notice"><%= flash[:alert] %></p>
+  <% end %>
+</div>
+<br>
+
 <h2> Students </h2>
-<div class="table">
+<div class="admin">
   <table>
     <tr>
       <th>Email</th>
@@ -13,6 +21,7 @@
       <th>University</th>
       <th>Edit</th>
       <th>Show</th>
+      <th>Delete</th>
     </tr>
 
     <% @students.each do |s| %>
@@ -23,6 +32,7 @@
         <td><%= s.university %></td>
         <td><%= link_to 'Edit', admin_edit_path(s) %></td>
         <td><%= link_to 'Show', admin_show_path(s) %></td>
+        <td><%= link_to 'Destroy', admins_delete_path(:student_id => s.id) , method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </table>
@@ -30,7 +40,7 @@
 </div>
 
 <h2> Librarian </h2>
-<div class="table">
+<div class="admin">
   <table>
     <tr>
       <th>Email</th>
@@ -38,6 +48,7 @@
       <th>Library</th>
       <th>Edit</th>
       <th>Show</th>
+      <th>Delete</th>
     </tr>
 
     <% @librarians.each do |l| %>
@@ -47,6 +58,7 @@
         <td><%= l.library %></td>
         <td><%= link_to 'Edit', admin_edit_librarian_path(l) %></td>
         <td><%= link_to 'Show', admin_show_librarian_path(l) %></td>
+        <td><%= link_to 'Destroy', admins_delete_path(:lib_id => l.id) , method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </table>

@@ -1,0 +1,33 @@
+<div class="heading">
+  <h1>Librarian Profile</h1></div>
+</div>
+
+<div class="msg">
+  <ul>
+    <% @librarian.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+</div>
+
+<div class="forms">
+  <%= form_for @librarian do |form| %>
+
+    <p>
+      <%= form.label :email %><br>
+      <%= @librarian.email %>
+    </p>
+
+    <p>
+      <%= form.label :name %><br>
+      <%= @librarian.name %>
+    </p>
+
+
+    <p>
+      <%= form.label :library %>
+      <%= @librarian.library %>
+    </p>
+
+  <% end %>
+</div>

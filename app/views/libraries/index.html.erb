@@ -1,0 +1,33 @@
+<div class="heading">
+  <h1>Listing Libraries</h1>
+</div>
+<br/>
+
+<div class="admin">
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>University</th>
+      <th>Location</th>
+      <th>MaxDays</th>
+      <th>Fine</th>
+      <th>Destroy</th>
+    </tr>
+
+    <% if !@libraries.nil? then @libraries.each do |library| %>
+      <tr>
+        <td><%= library.name %></td>
+        <td><%= library.university %></td>
+        <td><%= library.location %></td>
+        <td><%= library.maxdays %></td>
+        <td><%= library.fine %></td>
+        <td><%= link_to 'Destroy', libraries_delete_path(:lib_id => library.id) , method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+      <% end %>
+  </table>
+  <br/>
+
+  <%= link_to 'New Library', new_library_path %>
+
+</div>
