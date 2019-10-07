@@ -3,11 +3,11 @@ class StudentsController < ApplicationController
     @student = Student.find(session[:id])
     check = params[:book_ids].nil?
     if !check
-      historyreq = HistoryRequest.where(student_email:@student.email, status:'Checked Out')
+      obj = HistoryRequest.new
       checkout_list = params[:book_ids].collect {|id| id.to_i}
       checkout_list.each do |id|
         book = Book.find(id)
-        if historyreq.count > @student.maxbook
+        if obj.checkoutavailability(@student.email, @student.maxbook)
           flash[:alert] = "Maximum checkout books already reached!"
           break
         elsif book.number_available > 0 && !book.special
@@ -40,6 +40,7 @@ class StudentsController < ApplicationController
       end
     @hist_req = HistoryRequest.where(student_email:@student.email).order(updated_at: :desc)
   end
+
   def new
     @student = Student.new
     respond_to do |format|
@@ -55,17 +56,13 @@ class StudentsController < ApplicationController
     totalfine = 0
     if !@history_request.nil?
       @history_request.each do |hist|
-        @book = Book.where(isbn: hist.isbn).first
-        @library = Library.where(university: @book.university, name: @book.library).first
-        hist = hist.calculatefines(@library.maxdays, @library.fine)
-        totalfine = totalfine + hist.fines
-        hist.save
+        totalfine = totalfine + hist.evaluatebooks(hist.isbn)
       end
+    end
       @history_request_totalfines = HistoryRequest.new(:fines => totalfine)
-      @history_request = HistoryRequest.where("fines > 0", student_email: @student.email)
+      @history_request = HistoryRequest.where(student_email: @student.email).where('fines > 0')
       render 'students/index'
     end
-  end
 
   def library_list
     @libraries = Library.all
@@ -87,9 +84,8 @@ class StudentsController < ApplicationController
       render "students/history_request"
     elsif my_render_type == "bookmark"
       books_id = params[:book_id].to_i
-      book = Book.find(books_id)
-      obj = Bookmark.new(:isbn => book.isbn , :title => book.title, :author => book.author, :edition => book.edition, :student_name => @student.name, :student_email => @student.email)
-      obj.save
+      bookmark = Bookmark.new
+      bookmark.createnewbookmark(books_id,@student.email, @student.name)
       redirect_to students_books_path(type: "books")
     elsif my_render_type == "book_return"
         hist_id = params[:hist_id].to_i

@@ -19,11 +19,12 @@
       <li><%= link_to "Libraries", students_library_list_path(type: "library_list")%></li>
       <li><%= link_to "Books", students_books_path(type: "books") %></li>
       <li><%= link_to "Checkout History", students_history_request_path(type: "history_request") %></li>
+      <li><%= link_to "Logout", sessions_destroy_path %></li>
     </ul>
   </div>
 </nav>
 <div class="container">
-  <input class='form-control' id='myInput' type='text' placeholder='Search for book from table'>
+  <input class='form-control' id='myInput' type='text' placeholder='Search for book based on attributes from table'>
   <%= form_tag students_history_request_path do %>
     <table class='table table-striped'>
       <thead>
@@ -38,6 +39,7 @@
         <th scope="col">Subject</th>
         <th scope="col">Summary</th>
         <th scope="col">Special?</th>
+        <th scope="col">Available</th>
         <th scope="col"> Hold Requests</th>
         <th data-sort-ignore="true">Checkout</th>
         <th scope="col">Bookmark</th>
@@ -56,6 +58,7 @@
             <td><%= book.subject %></td>
             <td><%= book.summary %></td>
             <td><%= book.special %></td>
+            <td><%= book.number_available %></td>
             <td><%= book.number_holdrequest %></td>
             <%if book.university == @student.university %>
             <td><%= check_box_tag "book_ids[]", book.id, false, class: 'selectable' %>
