@@ -3,7 +3,7 @@
 </div>
 <br/>
 
-<div class="table">
+<div class="admin">
   <table>
     <tr>
       <th>Name</th>
@@ -11,6 +11,7 @@
       <th>Location</th>
       <th>MaxDays</th>
       <th>Fine</th>
+      <th>Destroy</th>
     </tr>
 
     <% if !@libraries.nil? then @libraries.each do |library| %>
@@ -20,6 +21,7 @@
         <td><%= library.location %></td>
         <td><%= library.maxdays %></td>
         <td><%= library.fine %></td>
+        <td><%= link_to 'Destroy', libraries_delete_path(:lib_id => library.id) , method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
       <% end %>

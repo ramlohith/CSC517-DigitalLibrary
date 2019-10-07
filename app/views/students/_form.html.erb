@@ -36,7 +36,7 @@
 
     <p>
       <%= form.label :university %><br>
-      <%= form.text_field :university %>
+      <%= select("student", "university", Library.all.collect{ |c| [ c.university] }) %>
     </p>
 
     <p>

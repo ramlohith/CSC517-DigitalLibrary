@@ -3,50 +3,52 @@
 </div>
 <br/>
 
-<div class="table">
-  <table>
+
+<div class="admin">
+<table>
+  <thead>
+  <tr>
+    <th scope="col">ISBN</th>
+    <th scope="col">Title</th>
+    <th scope="col">Author</th>
+    <th scope="col">Language</th>
+    <th scope="col">Published</th>
+    <th scope="col">Edition</th>
+    <th scope="col">Image</th>
+    <th scope="col">Subject</th>
+    <th scope="col">Summary</th>
+    <th scope="col">Special</th>
+    <th scope="col">Library</th>
+    <th scope="col">In Stock</th>
+    <th scope="col">Show</th>
+    <th scope="col">Edit</th>
+    <th scope="col">Destroy</th>
+    <th scope="col"> History </th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @books.each do |book| %>
     <tr>
-      <th> ISBN </th>
-      <th> Title </th>
-      <th> Author </th>
-      <th> Language </th>
-      <th> Published </th>
-      <th> Edition </th>
-      <th> Image </th>
-      <th> Subject </th>
-      <th> Summary </th>
-      <th> special </th>
-      <th> Library </th>
-      <th> University </th>
-      <th> Instock </th>
-      <th> Checked </th>
-      <th> Hold Requests </th>
-      <th> </th>
+      <td><%= book.isbn %></td>
+      <td><%= book.title %></td>
+      <td><%= book.author %></td>
+      <td><%= book.language %></td>
+      <td><%= book.published %></td>
+      <td><%= book.edition %></td>
+      <td><%= image_tag book.image.url(:thumb) %></td>
+      <td><%= book.subject %></td>
+      <td><%= book.summary %></td>
+      <td><%= book.special %></td>
+      <td><%= book.library %></td>
+      <td><%= book.number_available %></td>
+      <td><%= link_to 'Show', book %></td>
+      <td><%= link_to 'Edit', books_edit_path(:book_id => book.id) %></td>
+      <td><%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <td><%= link_to 'History', admins_borrow_history_path(:book_isbn => book.isbn) %></td>
     </tr>
-    <%= if !@books.nil? then @books.each do |book| %>
-      <tr>
-        <td><%= book.isbn %></td>
-        <td><%= book.title %></td>
-        <td><%= book.author %></td>
-        <td><%= book.language %></td>
-        <td><%= book.published %></td>
-        <td><%= book.edition %></td>
-        <td><%= image_tag book.image.url(:thumb) %></td>
-        <td><%= book.subject %></td>
-        <td><%= book.summary %></td>
-        <td><%= book.special %></td>
-        <td><%= book.library %></td>
-        <td><%= book.university %></td>
-        <td><%= book.number_available %></td>
-        <td><%= book.number_checkedout %></td>
-        <td><%= book.number_holdrequest%></td>
-        <td><%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-    <% end %>
-  </table>
-  <br/>
+  <%end %>
+  </tbody>
+</table>
   <%= link_to 'New Book', new_book_path %>
 </div>
-
-

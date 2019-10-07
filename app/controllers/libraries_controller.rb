@@ -50,6 +50,17 @@ class LibrariesController < ApplicationController
     end
   end
 
+  def destroy
+    libid = params[:lib_id]
+    @library = Library.find(libid)
+    @library.destroy
+
+    respond_to do |format|
+      format.html { redirect_to admins_index_url, alert: "Library Deleted!" }
+      format.json { head :no_content }
+    end
+  end
+
   def library_param
        params.require(:library).permit(:name,:university,:location,:maxdays,:fine)
   end

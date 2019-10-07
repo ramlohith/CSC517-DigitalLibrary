@@ -33,10 +33,6 @@
       <%= form.text_field :edition %>
     </p>
 
-    <p>
-      <%= form.label :summary %><br>
-      <%= form.text_field :summary %>
-    </p>
 
     <p>
       <%= form.label :library %><br>
@@ -54,13 +50,13 @@
     </p>
 
     <p>
-      <%= form.label :image %><br>
-      <%= form.file_field :image %>
+      <%= form.label :subject %><br>
+      <%= form.text_field :subject %>
     </p>
 
     <p>
-      <%= form.label :subject %><br>
-      <%= form.text_field :subject %>
+      <%= form.label :summary %><br>
+      <%= form.text_area :summary %>
     </p>
 
     <p>
@@ -69,15 +65,9 @@
     </p>
 
     <p>
-      <%= form.label :library %><br>
-      <%= form.text_field :library %>
+      <%= form.label :library %>
+      <%= select("book", "library", Library.all.collect{ |c| [ c.name] }) %>
     </p>
-
-    <p>
-      <%= form.label :university %><br>
-      <%= form.text_field :university %>
-    </p>
-
     <p>
       <%= form.label :number_avaiable %><br>
       <%= form.text_field :number_available %>

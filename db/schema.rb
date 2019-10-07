@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_02_155448) do
+ActiveRecord::Schema.define(version: 2019_10_07_162233) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email"
@@ -106,6 +106,7 @@ ActiveRecord::Schema.define(version: 2019_10_02_155448) do
     t.string "library"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "status"
   end
 
   create_table "libraries", force: :cascade do |t|

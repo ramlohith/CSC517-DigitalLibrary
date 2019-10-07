@@ -18,6 +18,8 @@ Rails.application.routes.draw do
   get 'libraries/edit'
   get 'libraries/index'
   get 'libraries/new'
+  get 'libraries/delete'
+  post 'libraries/delete'
   post '/sessions/create'
   get 'sessions/destroy'
 
@@ -32,15 +34,22 @@ Rails.application.routes.draw do
   get 'admins/users'
   get 'admins/delete'
   post 'admins/delete'
+  get 'admins/approval'
+  post 'admins/approval'
+  get 'admins/approved'
+  post 'admins/approved'
+  get 'admins/:id/edit', to: "admins#edit", as: :admins_profile_edit
+  post 'admins/:id', to: "admins#update", as: :admins_profile_update
   get 'admins/books_on_hold'
   get 'admins/checked'
   get 'admins/borrow_history'
   get 'admins/overdue'
+
   get 'students/:id/edit', to: 'students#admin_edit', as: :admin_edit
   get 'students/show/:id', to: 'students#admin_show', as: :admin_show
   post 'students/:id', to: 'students#admin_update', as: :admin_update
 
-  get 'librarians/:id/edit', to: 'librarians#admin_edit_librarian', as: :admin_edit_librarian
+  get 'admins/:id/admin_edit_librarian', to: 'admins#admin_edit_librarian', as: :admin_edit_librarian
   get 'librarians/show/:id', to: 'librarians#admin_show_librarian', as: :admin_show_librarian
   post 'librarians/:id', to: 'librarians#admin_update_librarian', as: :admin_update_librarian
 
