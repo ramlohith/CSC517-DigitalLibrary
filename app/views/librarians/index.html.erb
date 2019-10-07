@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<html lang="en">
 <h1>Librarian DashBoard</h1>
   <body>
   <td><%= link_to "Books", librarians_books_path %></td><br>
@@ -7,12 +6,13 @@
   <td><%= link_to "View Checkedout", librarians_checkedout_request_path%></td><br>
   <td><%= link_to "View BorrowingHistory", librarians_borrow_path%></td><br>
   <td><%= link_to 'Edit My profile', librarian_edit_path(session[:id]) %></td><br>
+  <td><%= link_to 'View Student Fines', librarians_fine_path%></td><br>
   <%  if !@librarian.nil? %>
     <% @library = Library.find_by_name(@librarian.library) %>
-    <% end %>
-    <%  if !@library.nil? %>
-      <td><%= link_to 'Edit Library', edit_library_path(@library) %></td><br>
-    <% end %>
+  <% end %>
+  <%  if !@library.nil? %>
+    <td><%= link_to 'Edit Library', edit_library_path(@library) %></td><br>
+  <% end %>
 
   </body>
 </html>
