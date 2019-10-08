@@ -24,10 +24,6 @@ class LibrariansController < ApplicationController
     end
   end
 
-  def admin_edit_librarian
-    @librarian = Librarian.find(params[:id])
-  end
-
   def admin_update_librarian
     @librarian = Librarian.find(params[:id])
     url = Rails.application.routes.recognize_path(request.referrer)   #fetch where the call is coming from
@@ -37,15 +33,15 @@ class LibrariansController < ApplicationController
     else
       @librarian = Librarian.find(params[:id])
       respond_to do |format|
-        if @librarian.update(email: params[:librarian][:email],name: params[:librarian][:name],password: params[:librarian][:password],library: params[:librarian][:library])
-          format.html { render 'login/index', notice: 'Librarian was successfully updated.#{last_controller}' }
-          format.json { head :no_content }
-        else
-          format.html { render action:"edit" }
-          format.json { render json: @library.errors, status: :unprocessable_entity }
-        end
+      if @librarian.update(email: params[:librarian][:email],name: params[:librarian][:name],password: params[:librarian][:password],library: params[:librarian][:library])
+        format.html { redirect_to admins_users_path, alert: 'Librarian was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action:"edit" }
+        format.json { render json: @library.errors, status: :unprocessable_entity }
       end
     end
+      end
   end
 
   def admin_show_librarian
@@ -55,13 +51,6 @@ class LibrariansController < ApplicationController
       format.json { render json: @librarian }
     end
   end
-
-  def fine
-    @librarian = Librarian.find(session[:id])
-    @finepay = HistoryRequest.where("fines > 0").where(:library_name=> @librarian.library)
-    render "librarians/fine"
-  end
-
   def show
     @librarian = Librarian.find(session[:id])
     @hold = HistoryRequest.where(:library_name=>@librarian.library,:status=>"Waiting for Approval")
@@ -84,6 +73,23 @@ class LibrariansController < ApplicationController
     @books = Book.all
   end
 
+
+  def index
+
+  end
+
+  def create
+    @librarian = Librarian.new(librarian_params)
+    @librarian.status= "no"
+    if @librarian.save
+      redirect_to librarians_login_url, alert: "Registration Successful, Please login!!"
+    else
+      redirect_to new_librarian_path, alert: "OOPS!! Problem Occurred. Please enter details again!"
+    end
+    end
+  end
+
+
   def destroy
     bookid = params[:book_id]
     @book = Book.find(bookid)
@@ -94,24 +100,8 @@ class LibrariansController < ApplicationController
     end
   end
 
-  def index
-
+  private
+  def librarian_params
+    params.require(:librarian).permit(:email, :name, :password, :library)
   end
-
-  def create
-    @librarian = Librarian.new(librarian_params)
-    if @librarian.save
-      redirect_to librarians_login_url, alert: "Registration Successful, Please login!!"
-    else
-      redirect_to new_librarian_path, alert: "OOPS!! Problem Occurred. Please enter details again!"
-    end
-  end
-end
-
-
-
-private
-def librarian_params
-  params.require(:librarian).permit(:email, :name, :password, :library)
-end
 

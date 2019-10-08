@@ -2,6 +2,7 @@
   <h1> Register Book </h1>
 </div>
 
+
 <div class="msg">
   <% if flash[:alert] %>
     <div class="alert"><%= flash[:alert] %></div>
@@ -53,31 +54,28 @@
 
     <p>
       <%= form.label :summary %><br>
-      <%= form.text_field :summary %>
+      <%= form.text_area :summary %>
     </p>
 
     <p>
       <%= form.label :special %><br>
-      <%= form.text_field :special %>
+      <%= form.select :special, ["false", "true"]  %>
     </p>
 
     <p>
-      <%= form.label :library %><br>
-      <%= form.text_field :library %>
-    </p>
-
-    <p>
-      <%= form.label :university %><br>
-      <%= form.text_field :university %>
+      <%= form.label :library %>
+      <%= select("book", "library", Library.all.collect{ |c| [ c.name] }) %>
     </p>
 
     <p>
       <%= form.label :number_avaiable %><br>
       <%= form.text_field :number_available %>
     </p>
+
     <p>
       <%= form.submit %>
     </p>
 
   <% end %>
 </div>
+

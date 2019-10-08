@@ -11,6 +11,7 @@
       <th>Location</th>
       <th>MaxDays</th>
       <th>Fine</th>
+
     </tr>
 
     <% if !@libraries.nil? then @libraries.each do |library| %>
@@ -20,6 +21,7 @@
           <td><%= library.location %></td>
           <td><%= library.maxdays %></td>
           <td><%= library.fine %></td>
+
         </tr>
       <% end %>
     <% end %>

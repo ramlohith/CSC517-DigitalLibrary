@@ -196,7 +196,7 @@ class StudentsController < ApplicationController
                          education: params[:student][:education],
                          university: params[:student][:education]
       )
-        format.html { render 'admins/index', alert: 'Student successfully updated.' }
+        format.html { redirect_to admins_users_path, alert: 'Student successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

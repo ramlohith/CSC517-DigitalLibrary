@@ -43,11 +43,15 @@ class SessionsController < ApplicationController
     if last_controller == "librarians"
       @librarian = Librarian.find_by_email(log_params[:email])
       if !@librarian.nil?
-        if @librarian.authenticate(log_params[:password])
-          session[:id] = @librarian.id
-          redirect_to librarians_index_path(@librarian) and return
+        if @librarian.status == "yes"
+          if @librarian.authenticate(log_params[:password])
+            session[:id] = @librarian.id
+            redirect_to librarians_index_path(@librarian) and return
+          else
+            redirect_to librarians_login_url, alert: "Invalid ID or Password!!" and return
+          end
         else
-          redirect_to librarians_login_url, alert: "Invalid ID or Password!!" and return
+          redirect_to librarians_login_url, alert: "Librarian Waiting to be approved by Admin" and return
         end
       else
         redirect_to new_librarian_path, alert: "Librarian ID does not exists, Please register!!" and return

@@ -5,8 +5,8 @@ class CreateLibrarians < ActiveRecord::Migration[6.0]
       t.string :name
       t.string :password_digest
       t.string :library
-
       t.timestamps
+      t.string :status
     end
   end
 end
