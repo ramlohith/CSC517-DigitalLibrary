@@ -63,10 +63,22 @@ class BooksController < ApplicationController
 
   def show
     bookid = params[:book_id]
+    bookview = params[:id]
+    if bookview == "index"
+      @books = Book.all
+      respond_to do |format|
+        format.html # new.html.erb
+        format.json { render json: @books }
+      end
+      render "books/index"
+    elsif bookview == "edit"
     @book = Book.find(bookid)
+      render "books/edit"
+    else
+      @book = Book.find(bookid)
       render "books/show"
   end
-
+  end
   def destroy
     @book = Book.find(params[:id])
     @book.destroy

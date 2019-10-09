@@ -11,6 +11,12 @@ class LibrariansController < ApplicationController
     @librarian = Librarian.find(params[:id])
   end
 
+  def fine
+    @librarian = Librarian.find(session[:id])
+    @finepay = HistoryRequest.where("fines > 0").where(:library_name=> @librarian.library)
+    render "librarians/fine"
+  end
+
   def update
     @librarian = Librarian.find(params[:id])
     respond_to do |format|
@@ -78,6 +84,16 @@ class LibrariansController < ApplicationController
 
   end
 
+  def destroy
+    bookid = params[:book_id]
+    @book = Book.find(bookid)
+    @book.destroy
+    respond_to do |format|
+      format.html { redirect_to librarians_path, notice: 'Book was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  end
+
   def create
     @librarian = Librarian.new(librarian_params)
     @librarian.status= "no"
@@ -90,15 +106,7 @@ class LibrariansController < ApplicationController
   end
 
 
-  def destroy
-    bookid = params[:book_id]
-    @book = Book.find(bookid)
-    @book.destroy
-    respond_to do |format|
-      format.html { redirect_to librarians_path, notice: 'Book was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
+
 
   private
   def librarian_params

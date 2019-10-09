@@ -1,5 +1,4 @@
 <h1>Books</h1>
-
 <table>
   <thead>
     <tr>
@@ -33,10 +32,21 @@
          <td><%= book.subject %></td>
          <td><%= book.summary %></td>
          <td><%= book.special %></td>
+         <% @lib = Librarian.find(session[:id]) %>
+         <% @library = Library.find_by_name(@lib.library) %>
+         <% if @library.name == book.library %>
          <td><%= link_to 'Destroy', librarians_destroy_path(:book_id => book.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+           <% else %>
+           <td></td>
+           <%end %>
+         <% if @library.name == book.library %>
          <td><%= link_to 'Edit', books_edit_path(:book_id => book.id) %></td>
+         <% else %>
+           <td></td>
+         <%end %>
          <td><%= link_to 'Show', books_show_path(:book_id => book.id) %></td>
        </tr>
   <%end %>
   </tbody>
 </table>
+</body>

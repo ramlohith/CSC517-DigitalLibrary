@@ -156,18 +156,18 @@ class StudentsController < ApplicationController
     @student = Student.find(params[:id])
   end
 
-  def destroy
-    @student = Student.find(params[:id])
-    @student.destroy
-
-    respond_to do |format|
-      format.html { redirect_to admins_allstudents_path}
-      format.json { head :no_content }
-    end
-  end
-
   def update
     @student = Student.find(params[:id])
+    @bookmark = Bookmark.where(student_email: @student.email)
+    @history_request = HistoryRequest.where(student_email: @student.email)
+    totalfine = 0
+    if !@history_request.nil?
+      @history_request.each do |hist|
+        totalfine = totalfine + hist.evaluatebooks(hist.isbn)
+      end
+    end
+    @history_request_totalfines = HistoryRequest.new(:fines => totalfine)
+    @history_request = HistoryRequest.where(student_email: @student.email).where('fines > 0')
 
     respond_to do |format|
       if @student.update(email: params[:student][:email], name: params[:student][:name], password: params[:student][:password])
@@ -179,6 +179,18 @@ class StudentsController < ApplicationController
       end
     end
   end
+
+  def destroy
+    @student = Student.find(params[:id])
+    @student.destroy
+
+    respond_to do |format|
+      format.html { redirect_to admins_allstudents_path}
+      format.json { head :no_content }
+    end
+  end
+
+
 
   def admin_edit
     @student = Student.find(params[:id])

@@ -49,7 +49,6 @@ Rails.application.routes.draw do
   get 'admins/borrow_history'
   get 'admins/overdue'
 
-  get 'students/:id/edit', to: 'students#admin_edit', as: :admin_edit
   get 'students/show/:id', to: 'students#admin_show', as: :admin_show
   post 'students/:id', to: 'students#admin_update', as: :admin_update
 
@@ -80,9 +79,10 @@ Rails.application.routes.draw do
   post 'students/login'
   get 'students/delete'
   post 'students/delete'
+  get 'students/:id/edit', to: 'students#edit', as: :student_edit
+  post 'students/:id', to: 'students#update', as: :student_update
   get 'students/admin_edit'
   post 'students/admin_edit'
-  get 'students/:id/edit', to: 'students#edit', as: :edit_student
 
   patch 'students/:id', to: 'students#update'
   get 'students/show'

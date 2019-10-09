@@ -3,6 +3,8 @@
 <table>
   <thead>
   <tr>
+    <th scope="col">Student Name</th>
+    <th scope="col">Student Email</th>
     <th scope="col">Library</th>
     <th scope="col">ISBN</th>
     <th scope="col">Status</th>
@@ -13,6 +15,8 @@
   <tbody>
   <% @hold.each do |hist| %>
     <tr>
+      <td><%= hist.student_name %></td>
+      <td><%= hist.student_email %></td>
       <td><%= hist.library_name %></td>
       <td><%= hist.isbn%></td>
       <td><%= hist.status %></td>
