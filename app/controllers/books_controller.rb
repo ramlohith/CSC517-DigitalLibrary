@@ -62,7 +62,8 @@ class BooksController < ApplicationController
   end
 
   def show
-    @book = Book.find(params[:id])
+    bookid = params[:book_id]
+    @book = Book.find(bookid)
       render "books/show"
   end
 
