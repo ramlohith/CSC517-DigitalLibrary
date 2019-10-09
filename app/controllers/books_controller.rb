@@ -6,53 +6,32 @@ class BooksController < ApplicationController
 
   def update
     @book = Book.find(params[:id])
-    url = Rails.application.routes.recognize_path(request.referrer)   #fetch where the call is coming from
-    last_controller = url[:controller]
-    if last_controller == "librarians"
+    @library = Library.find_by_name(@book.library)
+    if !@library.nil?
+      @book.university = @library.university
+    end
       respond_to do |format|
           if @book.update(isbn: params[:book][:isbn],
                           title: params[:book][:title],
                           author: params[:book][:author],
                           edition: params[:book][:edition],
+                          language: params[:book][:language],
+                          published: params[:book][:published],
+                          subject: params[:book][:subject],
                           summary: params[:book][:summary],
+                          special: params[:book][:special],
                           library: params[:book][:library],
                           number_available: params[:book][:number_available],
                           number_checkedout: params[:book][:number_checkedout],
                           number_holdrequest: params[:book][:number_holdrequest])
-            format.html { render 'librarians/index', notice: 'Book was successfully updated.' }
-            format.html # new.html.erb
+            format.html { render books_show_path, alert: 'Book was successfully updated.' }
             format.json { head :no_content }
           else
             format.json { render json: @books }
             format.html { render action:"edit" }
-            format.json { render json: @library.errors, status: :unprocessable_entity }
+            format.json { render json: @book.errors, status: :unprocessable_entity }
           end
         end
-    else
-      @library = Library.find_by_name(@book.library)
-      if !@library.nil?
-        @book.university = @library.university
-      end
-      respond_to do |format|
-        if @book.update(isbn: params[:book][:isbn],
-                        title: params[:book][:title],
-                        author: params[:book][:author],
-                        edition: params[:book][:edition],
-                        summary: params[:book][:summary],
-                        library: params[:book][:library],
-                        number_available: params[:book][:number_available],
-                        number_checkedout: params[:book][:number_checkedout],
-                        number_holdrequest: params[:book][:number_holdrequest])
-          format.html { redirect_to admins_index_url, alert: 'Book was successfully updated.' }
-          format.html # new.html.erb
-          format.json { head :no_content }
-        else
-          format.json { render json: @books }
-          format.html { render action:"edit" }
-          format.json { render json: @library.errors, status: :unprocessable_entity }
-        end
-      end
-    end
   end
 
   def index
@@ -100,10 +79,11 @@ class BooksController < ApplicationController
 def set_recipe
   @book = Book.find(params[:id])
 end
+
   private
   def book_params
     params.require(:book).permit(:isbn, :title, :author, :language, :published, :edition, :image,
-                                 :subject, :summary, :special, :library, :number_available );
+                                 :subject, :summary, :special, :library, :number_available , :number_checkedout,
+                                 :number_holdrequest);
   end
-
 end

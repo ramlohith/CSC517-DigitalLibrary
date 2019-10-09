@@ -2,7 +2,6 @@
   <h1>Edit Book</h1></div>
 </div>
 
-
 <div class="msg">
   <ul>
     <% @book.errors.full_messages.each do |msg| %>
@@ -33,12 +32,6 @@
       <%= form.text_field :edition %>
     </p>
 
-
-    <p>
-      <%= form.label :library %><br>
-      <%= form.text_field :library %>
-    </p>
-
     <p>
       <%= form.label :language %><br>
       <%= form.text_field :language %>
@@ -61,7 +54,7 @@
 
     <p>
       <%= form.label :special %><br>
-      <%= form.text_field :special %>
+      <%= form.select :special, ["false", "true"] %>
     </p>
 
     <p>
@@ -81,7 +74,6 @@
       <%= form.label :number_holdrequest %><br>
       <%= form.text_field :number_holdrequest %>
     </p>
-
 
     <p>
       <%= form.submit %>

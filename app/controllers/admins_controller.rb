@@ -115,24 +115,18 @@ end
 
   def approved
     lib = params[:lib_email]
-    if !lib.nil?
       @librarian = Librarian.find_by_email(lib)
       if !@librarian.nil?
         @librarian.status= "yes"
-        @librarian.password_digest = "$2a$12$HWPzlzLwJgPMkp9ro3dQzuTTLqiAe8V2IDy52dzA3WCf7faKeDdu"
-        @librarian.save!
-#          if @librarian.update!(status: "yes")
+        if @librarian.save!
             respond_to do |format|
-            format.html # index.html.erb
+            format.html {redirect_to admins_approval_path, alert: "Librarian approved"}
             format.json { render json: @librarian}
             end
-        # end
+         end
       else
-        redirect_to admins_approval_path, alert: "not happening cus no value in library"
+        redirect_to admins_approval_path, alert: "Error Occurred. Please try again!"
       end
-    else
-      redirect_to admins_approval_path, alert: "not happening #{lib}"
-    end
   end
 
   def admin_edit_librarian
