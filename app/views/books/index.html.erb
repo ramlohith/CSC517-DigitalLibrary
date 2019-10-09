@@ -42,7 +42,7 @@
       <td><%= book.special %></td>
       <td><%= book.library %></td>
       <td><%= book.number_available %></td>
-      <td><%= link_to 'Show', book %></td>
+      <td><%= link_to 'Show', books_show_path(:book_id => book.id) %></td>
       <td><%= link_to 'Edit', books_edit_path(:book_id => book.id) %></td>
       <td><%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       <td><%= link_to 'History', admins_borrow_history_path(:book_isbn => book.isbn) %></td>
