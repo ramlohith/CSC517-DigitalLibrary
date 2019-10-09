@@ -35,8 +35,9 @@ As the admin credentials are preconfigured, Please use the following credentials
 11) Delete Student/Book/Librarian from the system - we can delete a book under the Books tab for each book by clicking on the destroy tab.
 
 Functionalities of Librarian -
+1) Sign up as a  librarian- Once you sign up as a librarian a request for approval will be sent to the Admin. A message will be displayed indicating that an approval has been sent. Once it is approved by the admin you can now login.
 
-> Log in with email and password.
+2) Log in with email and password.
 
 > Edit their own profile to choose an existing library. Each librarian can only work for one library.
 
