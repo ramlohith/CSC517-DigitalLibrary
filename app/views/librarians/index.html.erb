@@ -9,12 +9,6 @@
   <td><%= link_to 'Edit My profile', librarian_edit_path(session[:id]) %></td><br>
   <td><%= link_to 'Logout', sessions_destroy_path %></td><br>
   <td><%= link_to 'View Student Fines', librarians_fine_path%></td><br>
-  <%  if !@librarian.nil? %>
-    <% @library = Library.find_by_name(@librarian.library) %>
-  <% end %>
-  <%  if !@library.nil? %>
-      <td><%= link_to 'Edit Library', edit_library_path(@library) %></td><br>
-  <% end %>
 
   </body>
 </html>
