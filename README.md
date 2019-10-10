@@ -73,24 +73,43 @@ Functionalities of Librarian -
 
 Functionalities of Students -
 
-> View the list of all the libraries
+1) View the list of all the libraries- Under the "Libraries" tab we can see the list of libraries.
 
-> Edit profile to modify email, name and password only.
+2) Edit profile to modify email, name and password only- By clicking on the "Edit Profile" we can edit the student profile.
 
-> View all books
+3) View all books- By clicking on the "Books" Tab we can see all the details of the books.
 
-> Check out/Request/Return a book from any library associated with their University. - This option is available under the details page of any book.
+4) Check out a book from any library associated with their University. - This option is available under the "Books" Tab for each book.
 
-> Delete a reservation request, which has not been approved yet (pending). - Under hold request.
+5) Delete a reservation request, which has not been approved yet (pending). - Under "Checkout History" Tab we can delete the reservation if it is waiting for approval and has not been approved.
 
-> View/Edit their account attributes (including changing their password).
+6) Search through the books - we can search all the books based on their attributes.
 
-> Search through the books - Datatables have been implemented to search, sort all the books based on their attributes.
+7) Bookmark a book they are interested in - This option is available under the "Books" tab. For each book we can bookmark it and the bookmarked books are visible in the index page of the student.
 
-> Bookmark a book they are interested in - This option is available under the details page of any book.
+8) In the Home page we can see the overdue fines.
 
-> View their bookmarked books. - Under "show bookmarks"
+9) Receive an email when any of their book request is sucessful. - Make sure you use correct email ids.
 
-> View the overdue fines for his/her account. - Under "Show Checked Out Books"
+Different Cases for the Book return and checkout statuses, we can do all of the below logics:
 
-> Receive an email when any of their book request is sucessful. - Make sure you use correct email ids.
+If the book is available, we can proceed to check out:
+
+If the book is in Special Collection list, we can add this to Librarian's approval list and wait.
+Otherwise, we can checkout the book if we did not exceed the maximum number of books limit for the student.
+
+If the book is unavailable or the student has checked out N books already, we will inform the student that the book is unavailable or max limit reached.
+
+we can Create a book hold request if the student wants to continue requesting. Every Student can see the Number of hold requests for a book.
+
+Returning a book
+If there is no hold request for a book, we can return and increase the available count of the book
+If there is a pending hold request, After the student returns the book, the book will be added to the checked out list of the requested student.
+
+In case the Book is a Special Book and the student wants to checkout the book then the librarian will receive a Book request and if the librarian approves the request that book will be added to the checkout list of the student. we can Send a mail to the student that the book is checked out.
+
+Testing:
+
+We Tested all the functionalities of the Admin controller and Admin Model.
+
+
