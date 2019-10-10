@@ -1,5 +1,7 @@
 class StudentsController < ApplicationController
   def history_request
+    flash[:alert] = ""
+    bookchangenumber = false
     @student = Student.find(session[:id])
     check = params[:book_ids].nil?
     if !check
@@ -13,20 +15,13 @@ class StudentsController < ApplicationController
         elsif book.number_available > 0 && !book.special
           obj = HistoryRequest.new(:library_name => book.library, :isbn => book.isbn, :status => "Checked Out" , :student_name => @student.name , :student_email => @student.email)
           LibraryMailer.library_mailer(@student).deliver
-          book.number_available = book.number_available - 1
-          book.number_checkedout = book.number_checkedout + 1
           obj.save
-          book.save
-          break
+          bookchangenumber = true
         elsif book.special && book.number_available > 0
           obj = HistoryRequest.new(:library_name => book.library, :isbn => book.isbn, :status => "Waiting for Approval" , :student_name => @student.name , :student_email => @student.email)
-          book.number_available = book.number_available - 1
-          book.number_checkedout = book.number_checkedout + 1
           apprvl = ApprovalRequest.new(:student_email => @student.email, :isbn => book.isbn, :title => book.title, :author => book.author, :edition => book.edition, :university => book.university)
-          book.save
           obj.save
           apprvl.save
-          break
         elsif book.number_available == 0
           obj = HistoryRequest.new(:library_name => book.library, :isbn => book.isbn, :status => "On Hold" , :student_name => @student.name , :student_email => @student.email)
           book.number_holdrequest = book.number_holdrequest + 1
@@ -35,6 +30,11 @@ class StudentsController < ApplicationController
           book.save
           holdreq.save
           flash[:alert] = "Book sent to Hold request. Please wait till books are returned."
+        end
+        if bookchangenumber == true
+          book.number_available = book.number_available - 1
+          book.number_checkedout = book.number_checkedout + 1
+          book.save
         end
       end
       end
@@ -90,45 +90,21 @@ class StudentsController < ApplicationController
     elsif my_render_type == "book_return"
         hist_id = params[:hist_id].to_i
         histreq_obj = HistoryRequest.find(hist_id)
-        histreq_obj.status = "Returned"
-        var_isb = histreq_obj.isbn
-        book_obj = Book.where(isbn:var_isb).first
-        book_obj.number_available = book_obj.number_available + 1
-        book_obj.number_checkedout= book_obj.number_checkedout - 1
-        holdreq_obj = HoldRequest.where(isbn: book_obj.isbn).first
-        if !holdreq_obj.nil?
-          if !book_obj.special
-            obj = HistoryRequest.where(isbn: book_obj.isbn, student_email: holdreq_obj.student_email ).first
-            obj.status = "Checked Out"
-            LibraryMailer.library_mailer(@student).deliver
-            book_obj.number_available = book_obj.number_available - 1
-            book_obj.number_checkedout = book_obj.number_checkedout + 1
-            obj.save
-
-          elsif book_obj.special
-            obj = HistoryRequest.where(isbn: book_obj.isbn, student_email: holdreq_obj.student_email ).first
-            obj.status = "Waiting for Approval"
-            book_obj.number_available = book_obj.number_available - 1
-            book_obj.number_checkedout = book_obj.number_checkedout + 1
-            apprvl = ApprovalRequest.new(:student_email => holdreq_obj.student_email, :isbn => book_obj.isbn, :title => book_obj.title, :author => book_obj.author, :edition => book_obj.edition, :university => book_obj.university)
-
-            obj.save
-            apprvl.save
-          end
-          holdreq_obj.delete
-        end
-        book_obj.save
+        histreq_obj.setreturn
         histreq_obj.save
         redirect_to students_books_path(type: "history_request")
     elsif my_render_type == "delete_reservation"
       hist_id = params[:hist_id].to_i
       histreq_obj = HistoryRequest.find(hist_id)
+      if histreq_obj.status == "Waiting for Approval"
+        apprvl_obj = ApprovalRequest.where(:student_email => @student.email, :isbn => histreq_obj.isbn).first
+        apprvl_obj.destroy
+      end
       histreq_obj.destroy
-      apprvl_obj = ApprovalRequest.where(:student_email => @student.email, :isbn => histreq_obj.isbn).first
-      apprvl_obj.destroy
       book_obj = Book.where(:isbn => histreq_obj.isbn).first
-      book_obj.number_available = book_obj.number_available + 1
       book_obj.number_holdrequest = book_obj.number_holdrequest - 1
+      book_obj.save
+      redirect_to students_books_path(type: "history_request")
       else
       render "students/index" #EDIT THIS!!
     end

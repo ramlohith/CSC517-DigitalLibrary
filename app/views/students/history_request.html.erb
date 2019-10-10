@@ -27,7 +27,7 @@
 
 <div class="container">
   <% if flash[:alert] %>
-    <p id="notice"><%= flash[:alert] %></p>
+    <h1><%= flash[:alert] %></h1>
   <% end %>
   <table class="table table-striped">
     <thead>
@@ -52,18 +52,14 @@
             <button>Return</button>
             <%  end  %></td>
             <%else %>
-            <td><%= link_to students_book_return_path(type: "book_return", :hist_id => hist.id) do %>
-                <button disabled>Return</button>
-              <%  end  %></td>
+            <td></td>
             <%end %>
-          <% if hist.status == "Waiting for Approval" %>
+          <% if hist.status == "Waiting for Approval" || hist.status == "On Hold" %>
             <td><%= link_to students_book_delete_reservation_path(type: "delete_reservation", :hist_id => hist.id) do %>
                 <button>Delete Reservation</button>
               <%  end  %></td>
           <%else %>
-            <td><%= link_to students_book_delete_reservation_path(type: "delete_reservation", :hist_id => hist.id) do %>
-                <button disabled>Delete Reservation</button>
-              <%  end  %></td>
+            <td></td>
           <%end %>
         </tr>
       <% end %>
