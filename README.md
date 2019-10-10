@@ -3,7 +3,8 @@
 * Ruby version:
 ruby 2.6.3p62 (2019-04-16 revision 67580) [x64-mingw32]
 
-We will follow a particular sequence to test all the functionalities:
+We will follow a particular sequence to test all the functionalities:(Please Use the Home Button to traverse back to the index page or use the back arrow where Home button is absent)
+
 Starting with the Admin:
 
 Functionalities of Admin -
