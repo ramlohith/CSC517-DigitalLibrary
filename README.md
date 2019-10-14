@@ -24,7 +24,7 @@ As the admin credentials are preconfigured, Please use the following credentials
 
 4) Create Librarian or Student accounts - Please select the New Librarian Registration or the New Student Registration tab. Once You register we take you to the Student Home page so that you can login or check the login.
 
-5) Adding New Books- Under the Books Tab we can see a New Book option which allows us to create a new book.
+5) Adding New Books- Under the Books Tab we can see a New Book option which allows us to create a new book. There is an issue uploading image on the heroku server, and creating a book with an image will cause the application to throw an error. So, create a book without an image.
 
 6) Deleting a Book- Beside each Book we can click the destroy link to delete the book.
 
